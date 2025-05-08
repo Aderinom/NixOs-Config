@@ -1,0 +1,41 @@
+{
+    "css.validate": false,
+    "editor.formatOnSave": true,
+    "explorer.confirmPasteNative": false,
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nixd",
+    "nix.serverSettings": {
+        //TODO: https://kokada.dev/blog/make-nixd-module-completion-to-work-anywhere-with-flakes/
+        "nixd": {
+            "formatting": {
+                "command": [
+                    "alejandra"
+                ]
+            },
+            "nixpkgs": {
+                "expr": "import (builtins.getFlake (\"git+file://\" + toString ./.)).inputs.nixpkgs {};"
+            },
+            "options": {
+                "options": {
+                    "expr": "(builtins.getFlake (\"git+file://\" + toString ./.)).nixosConfigurations.laptop.options"
+                },
+                "home-manager": {
+                    "expr": "(builtins.getFlake (\"git+file://\" + toString ./.)).nixosConfigurations.laptop.options.home-manager.users.type.getSubOptions []"
+                },
+                "outputs": {
+                    "expr": "{outputs = let flake = builtins.getFlake (\"git+file://\" + toString ./.); in { my = flake.outputs.my; nix = flake.outputs.nix;};}"
+                },
+                "input": {
+                    "expr": "{inputs = (builtins.getFlake (\"git+file://\" + toString ./.)).inputs;}"
+                }
+            }
+        },
+    },
+    "nix.hiddenLanguageServerErrors": [
+        "textDocument/definition",
+        "textDocument/documentSymbol",
+        "textDocument/formatting"
+    ],
+    "cSpell.enabled": false,
+    "autoHide.mode": "manual"
+}

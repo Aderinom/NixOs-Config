@@ -1,0 +1,209 @@
+@import url("../../.cache/wal/colors-waybar.css");
+
+/* ?              GENERAL            */
+
+* {
+  font-size: 15px;
+  font-family: "CodeNewRoman Nerd Font Propo";
+  color: white;
+}
+
+window#waybar {
+  all: unset;
+}
+
+.modules-left {
+  padding: 7px;
+  margin: 10 0 0 25;
+  border-radius: 5px;
+  background: alpha(@background, 0.3);
+  box-shadow: none;
+}
+
+.modules-right {
+  padding: 7px;
+  margin: 10 25 0 0;
+  border-radius: 5px;
+  background: alpha(@background, 0.3);
+  box-shadow: none;
+}
+
+tooltip {
+  border: none;
+  background: alpha(@background, 0.3);
+  box-shadow: none;
+  border-radius: 10px;
+}
+
+tooltip * {
+  font-size: 15px;
+  font-family: "CodeNewRoman Nerd Font Propo";
+}
+
+#custom-notification {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+/* ?              RIGHT MODULE            */
+
+#clock:hover,
+#custom-pacman:hover,
+#custom-notification:hover,
+#bluetooth:hover,
+#network:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover {
+  transition: all 0.3s ease;
+  color: @color9;
+}
+
+#clock {
+  padding: 0px 5px;
+
+  transition: all 0.3s ease;
+}
+
+#bluetooth {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+#network {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+#battery {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+#battery.charging {
+  color: @color2;
+}
+
+#battery.warning:not(.charging) {
+  color: @color1;
+}
+
+#battery.critical:not(.charging) {
+  color: @color1;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#group-expand {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+/* Left < */
+#custom-expand {
+  padding: 0px 7px 0px 5px;
+  /* color: alpha(@foreground, 0.2); */
+  transition: all 0.3s ease;
+}
+/* the | when expanded */
+#custom-endpoint {
+  margin: 0px 5px;
+}
+
+#custom-expand:hover {
+}
+
+#cpu,
+#memory,
+#temperature {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+/* !             CENTER MODULE            */
+
+.modules-center {
+  box-shadow: none;
+  background-color: unset;
+}
+
+#cava {
+  padding-right: 20px;
+  padding-left: 20px;
+  color: shade(@color1, 1);
+  text-shadow: 0px 0px 10px shade(@color1, 1.3);
+  opacity: 1;
+  background-color: transparent;
+  padding-bottom: 6px;
+  font-size: 14px;
+  font-family: "FiraCode Nerd Font Mono";
+}
+
+#workspaces button * {
+  /* Don't show any text in the buttons, so their size can be decreased */
+  font-size: 0px;
+}
+
+/* All Workspace buttons */
+#workspaces button {
+  all: unset;
+  padding: 0px 0px;
+  /* Space between the buttons */
+  margin: 0px 2px;
+  min-width: 18px;
+
+  background: transparent;
+  box-shadow: 0px -4px 0px @color1 inset;
+  /* border: white dotted 0.2px; */
+  opacity: 0.4;
+  transition: all 0.3s;
+
+  /* Makes the lines on the same height as middle of other widgets */
+  border-bottom: transparent solid 19px;
+}
+
+/* Make used workspaces have a bigger box and stronger color*/
+#workspaces button:not(.empty) {
+  box-shadow: 0px -6px 0px @color1 inset;
+  padding: 0px 0px 1px 0px;
+  opacity: 0.8;
+  /* background: @color2; */
+}
+/* Make used active workspace wider*/
+#workspaces button.active {
+  min-width: 30px;
+}
+/* Make hovered buttons borders thicker and stronger color*/
+#workspaces button:hover {
+  box-shadow: 0px -7px 0px @color1 inset;
+  opacity: 1;
+}
+
+/* !             LEFT MODULE            */
+
+#tray {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+#tray > widget {
+  opacity: 0.75;
+  background: none;
+}
+
+#tray > widget:hover {
+  opacity: 1;
+}
+
+#tray menu * {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+#tray menu separator {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}

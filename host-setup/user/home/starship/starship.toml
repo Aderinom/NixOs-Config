@@ -1,0 +1,65 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# prezto.toml
+add_newline = false
+
+# A minimal left prompt
+format = """$python$directory$character"""
+
+# move the rest of the prompt to the right
+right_format = """$status$all"""
+
+[character]
+success_symbol = "[](yellow)[](white)[](yellow)"
+error_symbol = "[❯](red)[!](red)[❮](red)"
+vicmd_symbol = "[](green)[](yellow)[](red)"
+
+[git_branch]
+format = '[$branch]($style) '
+style = 'bold green'
+
+[git_status]
+format = '$all_status$ahead_behind '
+ahead = '[](bold purple) '
+behind = '[](bold purple) '
+staged = '[✚](green) '
+deleted = '[✖](red) '
+renamed = '[➜](purple) '
+stashed = ''
+untracked = '[◼](white) '
+modified = '[*](white) '
+conflicted = '[═](yellow) '
+diverged = '⇕ '
+up_to_date = ''
+
+[directory]
+repo_root_style = "lswhite"
+style = "yellow"
+truncation_length = 3
+truncation_symbol = "…"
+truncate_to_repo = true
+fish_style_pwd_dir_length = 1
+before_repo_root_style = "dimmed yellow"
+read_only_style = "white"
+read_only = " "
+
+
+[cmd_duration]
+format = '[$duration]($style) '
+
+[line_break]
+disabled = true
+
+[status]
+disabled = false
+symbol = '✘ '
+
+[rust]
+disabled = false
+
+
+[package]
+disabled = true
+
+[nix_shell]
+format = "|❄️"
