@@ -1,0 +1,92 @@
+{
+  "editor.fontFamily": "'DroidSansM Nerd Font', 'monospace', monospace",
+  "explorer.confirmDelete": false,
+  "tabnine.experimentalAutoImports": true,
+  "dev.containers.mountWaylandSocket": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[java]": {
+    "editor.suggest.snippetsPreventQuickSuggestions": false
+  },
+  "hediet.vscode-drawio.resizeImages": null,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "remote.autoForwardPortsSource": "hybrid",
+  "files.exclude": {
+    "**/.*": false
+  },
+  "rustMacroExpand.displayCargoCommand": true,
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "never",
+  "git.confirmSync": false,
+  "git.replaceTagsWhenPull": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "redhat.telemetry.enabled": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "rust-analyzer.rustfmt.rangeFormatting.enable": true,
+  "rust-analyzer.inlayHints.closureStyle": "rust_analyzer",
+  "rust-analyzer.restartServerOnConfigChange": true,
+  "rust-analyzer.cargo.buildScripts.useRustcWrapper": true,
+  "rust-analyzer.check.command": "check",
+  "rust-analyzer.check.allTargets": true,
+  "rust-analyzer.check.workspace": true,
+  "rust-analyzer.checkOnSave": true,
+  "rust-analyzer.cargo.targetDir": true,
+  "rust-analyzer.highlighting.strings": false,
+  "rust-analyzer.semanticHighlighting.strings.enable": false,
+  "nix.enableLanguageServer": true,
+  "nix.hiddenLanguageServerErrors": [
+    "textDocument/definition"
+  ],
+  "nix.serverPath": "nixd",
+  "nix.formatterPath": "alejandra",
+  "nix.serverSettings": {
+    "nixd": {
+      "formatting": {
+        "command": [
+          "alejandra"
+        ]
+      },
+    }
+  },
+  "workbench.sideBar.location": "right",
+  "chat.commandCenter.enabled": false,
+  "explorer.autoReveal": true,
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "autoHide.mode": "manual",
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode"
+  },
+  "git.blame.editorDecoration.enabled": true,
+  "git.blame.editorDecoration.template": "(${authorDateAgo}) ${authorName} : ${subject}"
+}

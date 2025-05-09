@@ -1,0 +1,570 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+k ctrl+f",
+        "command": "-editor.action.formatSelection",
+        "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+k ctrl+f",
+        "command": "editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+    },
+    {
+        "key": "ctrl+shift+i",
+        "command": "-editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+    },
+    {
+        "key": "alt+left",
+        "command": "-gitlens.key.alt+left",
+        "when": "gitlens:key:alt+left"
+    },
+    {
+        "key": "alt+right",
+        "command": "-gitlens.key.alt+right",
+        "when": "gitlens:key:alt+right"
+    },
+    {
+        "key": "alt+right",
+        "command": "workbench.action.navigateForward",
+        "when": "canNavigateForward"
+    },
+    {
+        "key": "ctrl+shift+-",
+        "command": "-workbench.action.navigateForward",
+        "when": "canNavigateForward"
+    },
+    {
+        "key": "alt+left",
+        "command": "workbench.action.navigateBack",
+        "when": "canNavigateBack"
+    },
+    {
+        "key": "ctrl+alt+-",
+        "command": "-workbench.action.navigateBack",
+        "when": "canNavigateBack"
+    },
+    {
+        "key": "alt+1",
+        "command": "-workbench.action.openEditorAtIndex1"
+    },
+    {
+        "key": "alt+2",
+        "command": "-workbench.action.openEditorAtIndex2"
+    },
+    {
+        "key": "alt+3",
+        "command": "-workbench.action.openEditorAtIndex3"
+    },
+    {
+        "key": "alt+4",
+        "command": "-workbench.action.openEditorAtIndex4"
+    },
+    {
+        "key": "alt+5",
+        "command": "-workbench.action.openEditorAtIndex5"
+    },
+    {
+        "key": "alt+6",
+        "command": "-workbench.action.openEditorAtIndex6"
+    },
+    {
+        "key": "alt+7",
+        "command": "-workbench.action.openEditorAtIndex7"
+    },
+    {
+        "key": "ctrl+k ctrl+1",
+        "command": "-editor.foldLevel1",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "ctrl+k ctrl+2",
+        "command": "-editor.foldLevel2",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "ctrl+k ctrl+3",
+        "command": "-editor.foldLevel3",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "ctrl+k ctrl+4",
+        "command": "-editor.foldLevel4",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "ctrl+k ctrl+5",
+        "command": "-editor.foldLevel5",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "ctrl+k ctrl+6",
+        "command": "-editor.foldLevel6",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "ctrl+k ctrl+7",
+        "command": "-editor.foldLevel7",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "alt+1",
+        "command": "vikyd.FoldLevel.level1"
+    },
+    {
+        "key": "alt+2",
+        "command": "vikyd.FoldLevel.level2"
+    },
+    {
+        "key": "alt+3",
+        "command": "vikyd.FoldLevel.level3"
+    },
+    {
+        "key": "alt+4",
+        "command": "vikyd.FoldLevel.level4"
+    },
+    {
+        "key": "alt+5",
+        "command": "vikyd.FoldLevel.level5"
+    },
+    {
+        "key": "alt+6",
+        "command": "vikyd.FoldLevel.level6"
+    },
+    {
+        "key": "ctrl+r",
+        "command": "-workbench.action.reloadWindow",
+        "when": "isDevelopment"
+    },
+    {
+        "key": "ctrl+r",
+        "command": "-workbench.action.terminal.runRecentCommand",
+        "when": "accessibilityModeEnabled && terminalFocus && terminalHasBeenCreated || accessibilityModeEnabled && terminalFocus && terminalProcessSupported || accessibilityModeEnabled && accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal' || accessibilityModeEnabled && accessibleViewIsShown && terminalProcessSupported && accessibleViewCurrentProviderId == 'terminal'"
+    },
+    {
+        "key": "ctrl+r",
+        "command": "-inlineChat.regenerate",
+        "when": "inlineChatHasProvider && inlineChatVisible"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "-editor.action.toggleScreenReaderAccessibilityMode",
+        "when": "accessibilityHelpIsShown"
+    },
+    {
+        "key": "alt+e",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "alt+shift+e",
+        "command": "workbench.action.moveEditorRightInGroup"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "alt+shift+q",
+        "command": "workbench.action.moveEditorLeftInGroup"
+    },
+    {
+        "key": "alt+ctrl+e",
+        "command": "workbench.action.focusNextGroup"
+    },
+    {
+        "key": "alt+ctrl+q",
+        "command": "workbench.action.focusPreviousGroup"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quit"
+    },
+    {
+        "key": "alt+a",
+        "command": "-editor.action.accessibilityHelpConfigureAssignedKeybindings",
+        "when": "accessibilityHelpIsShown && accessibleViewHasAssignedKeybindings"
+    },
+    {
+        "key": "alt+a",
+        "command": "-tabnine.chat.commands.accept-change",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+d",
+        "command": "-gl.closeChat",
+        "when": "config.gitlab.duoChat.enabled && gitlab:chatAvailable && gitlab:chatAvailableForProject && gitlab:chatFocused && !gitlab.featureFlags.languageServerWebviews && activeViewlet == 'workbench.view.extension.gitlab-duo'"
+    },
+    {
+        "key": "alt+d",
+        "command": "-gl.webview.closeChat",
+        "when": "config.gitlab.duoChat.enabled && gitlab.featureFlags.languageServerWebviews && gitlab:chatAvailable && gitlab:chatAvailableForProject && gitlab:chatFocused && activeViewlet == 'workbench.view.extension.gitlab-duo'"
+    },
+    {
+        "key": "alt+d",
+        "command": "-gl.webview.duoChatV2.show",
+        "when": "config.gitlab.duoChat.enabled && gitlab.featureFlags.languageServerWebviews && gitlab:chatAvailable && gitlab:chatAvailableForProject && activeViewlet != 'workbench.view.extension.gitlab-duo'"
+    },
+    {
+        "key": "alt+d",
+        "command": "-gl.openChat",
+        "when": "config.gitlab.duoChat.enabled && gitlab:chatAvailable && gitlab:chatAvailableForProject && !gitlab.featureFlags.languageServerWebviews && activeViewlet != 'workbench.view.extension.gitlab-duo'"
+    },
+    {
+        "key": "alt+d",
+        "command": "-gl.webview.focusChat",
+        "when": "config.gitlab.duoChat.enabled && gitlab.featureFlags.languageServerWebviews && gitlab:chatAvailable && gitlab:chatAvailableForProject && !gitlab:chatFocused && activeViewlet == 'workbench.view.extension.gitlab-duo'"
+    },
+    {
+        "key": "alt+d",
+        "command": "-gl.focusChat",
+        "when": "config.gitlab.duoChat.enabled && gitlab:chatAvailable && gitlab:chatAvailableForProject && !gitlab.featureFlags.languageServerWebviews && !gitlab:chatFocused && activeViewlet == 'workbench.view.extension.gitlab-duo'"
+    },
+    {
+        "key": "alt+s",
+        "command": "-markdown.extension.editing.toggleStrikethrough",
+        "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+    },
+    {
+        "key": "alt+s",
+        "command": "-gitlens.showQuickRepoStatus",
+        "when": "!gitlens:disabled && config.gitlens.keymap == 'alternate'"
+    },
+    {
+        "key": "alt+tab",
+        "command": "workbench.action.terminal.new",
+        "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+    },
+    {
+        "key": "ctrl+shift+`",
+        "command": "-workbench.action.terminal.new",
+        "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+    },
+    {
+        "key": "alt+down",
+        "command": "-workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+up",
+        "command": "-workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+down",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "ctrl+pagedown",
+        "command": "-workbench.action.terminal.focusNext",
+        "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "alt+up",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "ctrl+pageup",
+        "command": "-workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "alt+e",
+        "command": "-gl.explainSelectedCode",
+        "when": "config.gitlab.duoChat.enabled && editorHasSelection && gitlab:chatAvailable && gitlab:chatAvailableForProject && !gitlab.featureFlags.languageServerWebviews"
+    },
+    {
+        "key": "alt+e",
+        "command": "-gl.webview.explainSelectedCode",
+        "when": "config.gitlab.duoChat.enabled && editorHasSelection && gitlab.featureFlags.languageServerWebviews && gitlab:chatAvailable && gitlab:chatAvailableForProject"
+    },
+    {
+        "key": "alt+r",
+        "command": "-tabnine.chat.commands.reject-change",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "-gl.refactorCode",
+        "when": "config.gitlab.duoChat.enabled && editorHasSelection && gitlab:chatAvailable && gitlab:chatAvailableForProject && !gitlab.featureFlags.languageServerWebviews"
+    },
+    {
+        "key": "alt+r",
+        "command": "-gl.webview.refactorCode",
+        "when": "config.gitlab.duoChat.enabled && editorHasSelection && gitlab.featureFlags.languageServerWebviews && gitlab:chatAvailable && gitlab:chatAvailableForProject"
+    },
+    {
+        "key": "alt+r",
+        "command": "-toggleSearchEditorRegex",
+        "when": "inSearchEditor && searchInputBoxFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "alt+`",
+        "command": "cursorEnd",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+k",
+        "command": "-cursorEnd",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+l",
+        "command": "cursorRight",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+f",
+        "command": "-cursorWordEndRight",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+l",
+        "command": "cursorRightSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "-cursorWordEndRightSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+b",
+        "command": "-cursorWordStartLeft",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+b",
+        "command": "-cursorWordStartLeftSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+k",
+        "command": "-wasd.killLine",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+alt+d",
+        "command": "-workbench.action.terminal.focusNext",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+alt+a",
+        "command": "-workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+j",
+        "command": "cursorDown",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+j",
+        "command": "cursorDownSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+i",
+        "command": "-editor.debug.action.showDebugHover",
+        "when": "editorTextFocus && inDebugMode"
+    },
+    {
+        "key": "ctrl+,",
+        "command": "-workbench.action.openSettings"
+    },
+    {
+        "key": "alt+o",
+        "command": "workbench.action.gotoSymbol",
+        "when": "!accessibilityHelpIsShown && !accessibleViewIsShown"
+    },
+    {
+        "key": "ctrl+shift+o",
+        "command": "-workbench.action.gotoSymbol",
+        "when": "!accessibilityHelpIsShown && !accessibleViewIsShown"
+    },
+    {
+        "key": "alt+,",
+        "command": "editor.action.showHover",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+i",
+        "command": "-editor.action.showHover",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+h",
+        "command": "cursorLeft",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+ctrl+h",
+        "command": "cursorWordEndLeft",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+w",
+        "command": "cursorUp",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+h",
+        "command": "cursorLeftSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+w",
+        "command": "cursorUpSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+k",
+        "command": "cursorUp",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+s",
+        "command": "cursorDown",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+k",
+        "command": "cursorUpSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "shift+alt+s",
+        "command": "cursorDownSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+s",
+        "command": "list.focusDown",
+        "when": "listFocus && !inputFocus && !treestickyScrollFocused"
+    },
+    {
+        "key": "alt+d",
+        "command": "list.toggleExpand",
+        "when": "listFocus"
+    },
+    {
+        "key": "alt+a",
+        "command": "list.focusParent",
+        "when": "listFocus"
+    },
+    {
+        "key": "alt+s",
+        "command": "quickInput.next",
+        "when": "inQuickInput && quickInputType == 'quickPick'"
+    },
+    {
+        "key": "alt+s",
+        "command": "selectNextCodeAction",
+        "when": "codeActionMenuVisible"
+    },
+    {
+        "key": "alt+s",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "key": "alt+w",
+        "command": "list.focusUp",
+        "when": "listFocus && !inputFocus && !treestickyScrollFocused"
+    },
+    {
+        "key": "alt+w",
+        "command": "quickInput.previous",
+        "when": "inQuickInput && quickInputType == 'quickPick'"
+    },
+    {
+        "key": "alt+w",
+        "command": "selectPrevCodeAction",
+        "when": "codeActionMenuVisible"
+    },
+    {
+        "key": "alt+w",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "key": "ctrl+alt+s",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+down",
+        "command": "-editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+alt+w",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+up",
+        "command": "-editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+,",
+        "command": "-gitlens.diffWithPrevious",
+        "when": "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'alternate' && resource in 'gitlens:tabs:tracked'"
+    },
+    {
+        "key": "alt+,",
+        "command": "-gitlens.diffWithPreviousInDiffLeft",
+        "when": "editorTextFocus && isInDiffEditor && !isInDiffRightEditor && config.gitlens.keymap == 'alternate' && resource in 'gitlens:tabs:tracked'"
+    },
+    {
+        "key": "alt+,",
+        "command": "-gitlens.diffWithPreviousInDiffRight",
+        "when": "editorTextFocus && isInDiffRightEditor && config.gitlens.keymap == 'alternate' && resource in 'gitlens:tabs:tracked'"
+    },
+    {
+        "key": "shift+alt+,",
+        "command": "-gitlens.diffLineWithPrevious",
+        "when": "editorTextFocus && config.gitlens.keymap == 'alternate' && resource in 'gitlens:tabs:tracked'"
+    },
+    {
+        "key": "alt+,",
+        "command": "-gitlens.key.alt+,",
+        "when": "gitlens:key:,"
+    },
+    {
+        "key": "alt+.",
+        "command": "problems.action.showQuickFixes",
+        "when": "problemFocus"
+    },
+    {
+        "key": "alt+c",
+        "command": "tabnine.chat.toggle-focus"
+    },
+    {
+        "key": "alt+f",
+        "command": "workbench.view.explorer"
+    },
+    {
+        "key": "alt+x",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "alt+enter",
+        "command": "editor.action.goToDeclaration"
+    },
+    {
+        "key": "alt+backspace",
+        "command": "workbench.action.navigateBack"
+    },
+    {
+        "key": "alt+shift+enter",
+        "command": "editor.action.openLink"
+    }
+]

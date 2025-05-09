@@ -1,0 +1,72 @@
+# Utility
+ahgood.shift-shift
+vikyd.vscode-fold-level
+amodio.toggle-excluded-files
+vitchu.vscode-autohide-vim
+gruntfuggly.todo-tree
+
+editorconfig.editorconfig
+
+fill-labs.dependi
+
+ms-vscode-remote.remote-containers
+ms-vscode-remote.remote-ssh
+ms-vscode-remote.remote-ssh-edit
+ms-vscode.hexeditor
+ms-vscode.remote-explorer
+
+streetsidesoftware.code-spell-checker
+
+# Ai
+tabnine.tabnine-vscode
+
+# Keymap
+mvromer.wasdmap
+
+# Docker 
+docker.docker
+ms-azuretools.vscode-docker
+
+# Git
+vivaxy.vscode-conventional-commits
+donjayamanne.githistory
+mhutchie.git-graph
+
+# Visual
+aaron-bond.better-comments
+dlasagno.wal-theme
+qufiwefefwoyn.inline-sql-syntax
+
+# Markdown/Docs
+unifiedjs.vscode-mdx
+davidanson.vscode-markdownlint
+bierner.markdown-mermaid
+hediet.vscode-drawio
+yzhang.markdown-all-in-one
+
+# Nix
+bbenoist.nix
+mkhl.direnv
+jnoortheen.nix-ide
+arrterian.nix-env-selector
+
+#Rust
+vadimcn.vscode-lldb
+rust-lang.rust-analyzer
+cargo-inspect-vscode.cargo-inspect
+jscearcy.rust-doc-viewer
+tamasfe.even-better-toml
+
+# TS
+ms-vscode.vscode-typescript-next
+biomejs.biome
+oven.bun-vscode
+prisma.prisma
+vue.volar
+yoavbls.pretty-ts-errors
+
+#Shell
+mads-hartmann.bash-ide-vscode
+foxundermoon.shell-format
+timonwong.shellcheck
+mkhl.shfmt

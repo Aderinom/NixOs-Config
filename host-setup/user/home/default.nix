@@ -2,6 +2,7 @@
   imports = [
     ./eza
     ./starship
+    ./vscode
     ./00-packages.nix
     ./01-fish.nix
     ./02-kitty.nix
