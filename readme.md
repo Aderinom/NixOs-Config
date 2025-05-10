@@ -21,6 +21,11 @@ My Personal Hyprland + Nixos Setup
 4. **Run** `./scripts/install.sh`
 5. **Reboot**
 
+Note!:  
+In case there is an error where "vars.<xxxx>" is undefined  
+I most likely forgot to push a new placeholder for the `flake-variables.nix`  
+You will have to add the variable to the `flake-variables.nix`  
+
 ## Structure
 
 ```sh
