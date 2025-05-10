@@ -2,40 +2,39 @@
   pkgs,
   inputs,
   outputs,
-  username,
-  host,
-  gitName,
-  gitMail,
-  flakeRoot,
+  vars,
   ...
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  home-manager.backupFileExtension = "hm-backup";
   home-manager = {
     useUserPackages = true; # Install packages to /etc/profiles instead of  $HOME/.nix-profile - Might become standard
     useGlobalPkgs = true; # Use nixpkgs from system
+    backupFileExtension = "hm-backup";
 
-    extraSpecialArgs = {inherit inputs username host gitName gitMail flakeRoot;};
+    extraSpecialArgs = {inherit inputs vars;};
 
-    users.${username} = {
+    users.${vars.username} = {
+      programs.home-manager.enable = true;
+      
+      home.stateVersion = vars.home-mgr-state-version;
+
+      home.username = "${vars.username}";
+      home.homeDirectory = "/home/${vars.username}";
+
       imports = [
         outputs.my.modules.home-manager
         ./home
         ../desktop/hyprland/home
       ];
-      home.username = "${username}";
-      home.homeDirectory = "/home/${username}";
-
-      programs.home-manager.enable = true;
     };
   };
 
-  users.users.${username} = {
+  users.users.${vars.username} = {
     isNormalUser = true;
-    description = "${username}";
+    description = "${vars.username}";
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -44,5 +43,5 @@
     shell = pkgs.fish;
   };
 
-  nix.settings.allowed-users = ["${username}"];
+  nix.settings.allowed-users = ["${vars.username}"];
 }

@@ -1,6 +1,6 @@
-{username, ...}: {
+{vars, ...}: {
   imports = [];
   # Hardcode password so we can access the vm
   users.mutableUsers = false;
-  users.users.${username}.password = "password";
+  users.users.${vars.username}.password = "password";
 }

@@ -1,11 +1,11 @@
 {
   config,
-  flakeRoot,
+  vars,
   pkgs,
   lib,
   ...
 }: let
-  currentFolder = "${flakeRoot}/host-setup/user/home/vscode";
+  currentFolder = "${vars.flakeRoot}/host-setup/user/home/vscode";
 in {
   programs.vscode.enable = true;
   programs.vscode.package = pkgs.vscode.fhs;

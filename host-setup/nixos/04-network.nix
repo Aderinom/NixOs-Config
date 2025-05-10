@@ -1,10 +1,10 @@
 {
   pkgs,
-  host,
+  vars,
   ...
 }: {
   networking = {
-    hostName = "${host}";
+    hostName = "${vars.host}";
     networkmanager.enable = true;
 
     nameservers = [

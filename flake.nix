@@ -26,16 +26,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-
-    flakeRoot = "/home/akelbsch/.nixos-config";
-    username = "akelbsch";
-
-    gitName = "Aaron Kelbsch";
-    gitMail = "git@kelbsch.net";
-
-    host = "durr-station";
-    kbdLayout = "de,us";
-
+    vars = import ./flake-variables.nix {};
     # Define supported systems
     systems = [
       "aarch64-linux"
@@ -57,22 +48,24 @@
       modules = import ./nix-extensions/modules; # Nix Os Modules to import
     };
 
+    vars = vars;
+
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs username host kbdLayout gitMail gitName flakeRoot;};
+        specialArgs = {inherit inputs outputs vars;};
         modules = [
           inputs.nix-index-database.nixosModules.nix-index
-          ./nix-config.nix
+          ./flake-nix-config.nix
           ./host-setup
           ./hosts/laptop
         ];
       };
 
       vm = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs username host kbdLayout gitMail gitName flakeRoot;};
+        specialArgs = {inherit inputs outputs vars;};
         modules = [
           inputs.nix-index-database.nixosModules.nix-index
-          ./nix-config.nix
+          ./flake-nix-config.nix
           ./host-setup
           ./hosts/vm
         ];

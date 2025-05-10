@@ -1,6 +1,6 @@
 {
-  flakeRoot,
   config,
+  vars,
   ...
 }: {
   programs.eza.enable = true;
@@ -9,5 +9,5 @@
   programs.eza.extraOptions = ["--group-directories-first" "--header"];
 
   xdg.configFile."eza/theme.yml".source =
-    config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/host-setup/user/home/eza/theme.yml";
+    config.lib.file.mkOutOfStoreSymlink "${vars.flakeRoot}/host-setup/user/home/eza/theme.yml";
 }

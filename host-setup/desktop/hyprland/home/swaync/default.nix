@@ -1,10 +1,10 @@
 {
   pkgs,
-  flakeRoot,
+  vars,
   config,
   ...
 }: let
-  thisDir = "${flakeRoot}/host-setup/desktop/hyprland/home/swaync";
+  thisDir = "${vars.flakeRoot}/host-setup/desktop/hyprland/home/swaync";
 in {
   home.packages = with pkgs; [swaynotificationcenter gnome-network-displays];
   xdg.configFile."swaync/style.css".source =

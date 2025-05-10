@@ -1,11 +1,11 @@
 # Config Yoinked from : <https://github.com/elifouts/Dotfiles/blob/main/.config/waybar/style.css>
 {
-  flakeRoot,
+  vars,
   config,
   pkgs,
   ...
 }: let
-  configDir = "${flakeRoot}/host-setup/desktop/hyprland/home/waybar/";
+  configDir = "${vars.flakeRoot}/host-setup/desktop/hyprland/home/waybar/";
 in {
   programs.waybar = {
     enable = true;

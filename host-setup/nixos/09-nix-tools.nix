@@ -1,6 +1,6 @@
 {
   pkgs,
-  username,
+  vars,
   ...
 }: {
   programs.nh = {
@@ -10,7 +10,7 @@
       enable = true;
       extraArgs = "--keep-since 7d --keep 5";
     };
-    flake = "/home/${username}/.nixos-config";
+    flake = "/home/${vars.username}/.nixos-config";
   };
 
   environment.systemPackages = with pkgs; [

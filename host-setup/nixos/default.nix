@@ -16,8 +16,7 @@
     ./14-virtualization.nix
     ./15-bluetooth.nix
     ./16-usb.nix
-    ./97-programs.nix
-    ./98-services.nix
-    ./99-state-version.nix
+    ./98-programs.nix
+    ./99-services.nix
   ];
 }

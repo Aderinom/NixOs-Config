@@ -1,6 +1,4 @@
 {
-  config,
-  flakeRoot,
   ...
 }: {
   programs.wofi.enable = true;

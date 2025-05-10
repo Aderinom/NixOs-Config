@@ -1,8 +1,4 @@
-{
-  username,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   services.displayManager.ly.enable = true;
   services.displayManager.ly.settings = {
     # # See : https://github.com/fairyglade/ly/blob/v1.0.2/res/config.ini

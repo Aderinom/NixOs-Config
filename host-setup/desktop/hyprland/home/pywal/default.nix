@@ -1,14 +1,14 @@
 {
   pkgs,
   config,
-  flakeRoot,
+  vars,
   ...
 }: let
   ensureColorTheme = pkgs.writeShellScript "pywal-init.sh" ''
     set -e
     export PATH="${pkgs.imagemagick}/bin:$PATH"
     if [ ! -f "${config.xdg.cacheHome}/wal/colors.sh" ]; then
-      ${pkgs.pywal16}/bin/wal -i ${flakeRoot}/assets/wallpapers/default.jpg
+      ${pkgs.pywal16}/bin/wal -i ${vars.flakeRoot}/assets/wallpapers/default.jpg
       hyprctl reload
       notify-send "Made Pretty" "Created colorscheme"
     fi

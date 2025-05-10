@@ -1,11 +1,10 @@
 {
-  gitMail,
-  gitName,
+  vars,
   ...
 }: {
   programs.git.enable = true;
-  programs.git.userEmail = gitMail;
-  programs.git.userName = gitName;
+  programs.git.userEmail = vars.gitMail;
+  programs.git.userName = vars.gitName;
   programs.git.lfs.enable = true;
 
   programs.git.extraConfig = {

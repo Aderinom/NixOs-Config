@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  username,
   ...
 }: let
   # These are only required if using the hyprland flake, rather than the version from nixpkgs

@@ -2,15 +2,15 @@
   inputs,
   pkgs,
   config,
-  flakeRoot,
+  vars,
   ...
 }: let
   # hyprDarkwindowPkgs = inputs.hypr-darkwindow.packages.${pkgs.system};
   # hyprPlugins = inputs.hyprland-plugins.packages.${pkgs.system};
   # hyprLockPkgs = inputs.hyprlock.packages.${pkgs.system};
   # hyprPkgs = inputs.hyprland.packages.${pkgs.system};
-  hyprDir = "${flakeRoot}/host-setup/desktop/hyprland/home/hyprland";
-  scriptsDir = "${flakeRoot}/host-setup/desktop/hyprland/home/scripts";
+  hyprDir = "${vars.flakeRoot}/host-setup/desktop/hyprland/home/hyprland";
+  scriptsDir = "${vars.flakeRoot}/host-setup/desktop/hyprland/home/scripts";
 in {
   wayland.windowManager.hyprland.enable = true;
   # wayland.windowManager.hyprland.package = hyprPkgs.default;

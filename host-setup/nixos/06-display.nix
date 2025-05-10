@@ -1,6 +1,6 @@
 {
   pkgs,
-  kbdLayout,
+  vars,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -12,7 +12,7 @@
 
   services.xserver.enable = true;
   services.xserver.videoDrivers = ["displaylink" "modesetting"];
-  services.xserver.xkb.layout = kbdLayout;
+  services.xserver.xkb.layout = vars.kbdLayout;
 
   # Enable displaylink (https://wiki.nixos.org/wiki/Displaylink)
   systemd.services.dlm.wantedBy = ["multi-user.target"];

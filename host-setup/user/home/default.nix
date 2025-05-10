@@ -10,6 +10,5 @@
     ./04-git.nix
     ./05-neovim.nix
     ./06-wine.nix
-    ./99-state-version.nix
   ];
 }

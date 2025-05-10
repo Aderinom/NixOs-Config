@@ -1,4 +1,14 @@
 {...}: {
+  flakeRoot = "/home/akelbsch/.nixos-config";
+  username = "akelbsch";
+
+  gitName = "Aaron Kelbsch";
+  gitMail = "git@kelbsch.net";
+
+  host = "durr-station";
+  kbdLayout = "de,us";
+
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   # When do I update stateVersion
   # Keep stateVersion to the version you originally installed.[1]
@@ -23,6 +33,15 @@
   # You have read all release notes starting from your stateVersion.
   # You have verified all instances of stateVersion in the code in <nixpkgs/nixos>.
   # You have made all manual interventions as required by the changes previously inventoried.
+  nix-state-version = "23.11";
 
-  system.stateVersion = "23.11";
+
+  # This value determines the Home Manager release that your configuration is
+  # compatible with. This helps avoid breakage when a new Home Manager release
+  # introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do
+  # want to update the value, then make sure to first check the Home Manager
+  # release notes.
+  home-mgr-state-version = "24.11";
 }
