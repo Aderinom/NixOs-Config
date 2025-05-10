@@ -17,7 +17,8 @@ in {
     config.lib.file.mkOutOfStoreSymlink "${currentFolder}/user/settings.json";
 
   # On switch, run the setup-extension script with vscode in its path
-  home.activation.installVSCodeExtensions = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    PATH="${pkgs.vscode.fhs}/bin:$PATH" ${currentFolder}/extensions/setup-extensions.sh > /tmp/nix-vscode-setup.log
-  '';
+  # Doesn't seem to work correcly
+  # home.activation.installVSCodeExtensions = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  #   PATH="${pkgs.vscode.fhs}/bin:$PATH" ${currentFolder}/extensions/setup-extensions.sh > /tmp/nix-vscode-setup.log
+  # '';
 }
