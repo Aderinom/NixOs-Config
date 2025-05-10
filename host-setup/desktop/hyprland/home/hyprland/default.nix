@@ -28,8 +28,6 @@ in {
     env = "HYPRCURSOR_THEME,rose-pine-hyprcursor";
   };
 
-  # enableNvidiaPatches = false;
-
   xdg.configFile."hypr/hyprlock.conf".source =
     config.lib.file.mkOutOfStoreSymlink "${hyprDir}/hyprlock.conf";
 

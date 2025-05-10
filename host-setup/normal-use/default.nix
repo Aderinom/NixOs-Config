@@ -2,6 +2,7 @@
 {
   imports = [
     ./desktop/hyprland/nixos
-    ./normal-use
+    ./nixos
+    ./user
   ];
 }
