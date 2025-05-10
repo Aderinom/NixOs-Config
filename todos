@@ -1,6 +1,14 @@
 # Todos
+[] Fix: vscode extension setup
+[] Fix: VM hyprland failing due to symlinking
 
-1. Authentication prompt styling
-2. Notification styling
+[] Feat: Better Wal with contrast and semantic logic
+[] Feat: Chromium auto extensions? - or alternative browser
+[] Feat: Gaming
 
-SwayOSd <https://github.com/ErikReider/SwayOSD>
+[] Style: Authentication prompt styling
+[] Style: Notification styling
+[] Style: SwayOSd <https://github.com/ErikReider/SwayOSD>
+
+TBD:
+[] Feat: Secret management
