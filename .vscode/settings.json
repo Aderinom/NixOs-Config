@@ -1,6 +1,6 @@
 {
     "css.validate": false,
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "explorer.confirmPasteNative": false,
     "nix.enableLanguageServer": true,
     "nix.serverPath": "nixd",
@@ -22,11 +22,11 @@
                 "home-manager": {
                     "expr": "(builtins.getFlake (\"git+file://\" + toString ./.)).nixosConfigurations.laptop.options.home-manager.users.type.getSubOptions []"
                 },
-                "outputs": {
-                    "expr": "{outputs = let flake = builtins.getFlake (\"git+file://\" + toString ./.); in { my = flake.outputs.my; nix = flake.outputs.nix;};}"
-                },
                 "input": {
                     "expr": "{inputs = (builtins.getFlake (\"git+file://\" + toString ./.)).inputs;}"
+                },
+                "vars": {
+                    "expr": "{vars = (builtins.getFlake (\"git+file://\" + toString ./.)).vars;}"
                 }
             }
         },

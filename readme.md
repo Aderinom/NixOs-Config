@@ -8,6 +8,9 @@ My Personal Hyprland + Nixos Setup
 - **Shell**: Fish + Staship
 - **Color theming** through PyWal
 
+- **Nixd LSP**: Setup for NixPkgs, Home Manager and flake internals
+- **Feature Sets**: Feature sets to allow splitting usecases
+
 ## Install
 
 1. **Clone** to wherever you would like the config to be - personally I use `$HOME/.nixos-config`
@@ -22,21 +25,15 @@ My Personal Hyprland + Nixos Setup
 5. **Reboot**
 
 Note!:  
-In case there is an error where "vars.<xxxx>" is undefined  
+In case there is a "vars.<xxxx>" is undefined  
 I most likely forgot to push a new placeholder for the `flake-variables.nix`  
 You will have to add the variable to the `flake-variables.nix`  
 
 ## Structure
 
 ```sh
-.
 ├── assets           -- Wallpapers, Images, etc.
-├── host-setup/      -- Default system setup
-│   ├── desktop/     -- Display Manager setup
-│   │   ├── hyprland -- Contains System and User Config
-│   │   └── kde6
-│   ├── nixos        -- System wide config
-│   └── user         -- User Based - Home Manager
+├── host-setup/      -- System Setup
 ├── hosts/           -- Machine Type Specalization
 │   ├── laptop
 │   └── vm
@@ -49,6 +46,10 @@ You will have to add the variable to the `flake-variables.nix`
 ├── hardware-config.nix
 └── nix-config.nix   -- Sets up nixpkgs
 ```
+
+## 
+
+
 
 ## (Un)License
 

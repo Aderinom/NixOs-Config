@@ -56,8 +56,9 @@
         modules = [
           inputs.nix-index-database.nixosModules.nix-index
           ./flake-nix-config.nix
-          ./host-setup
           ./hosts/laptop
+          ./flake-system.nix
+          ./flake-home-manager.nix
         ];
       };
 
@@ -66,8 +67,9 @@
         modules = [
           inputs.nix-index-database.nixosModules.nix-index
           ./flake-nix-config.nix
-          ./host-setup
           ./hosts/vm
+          ./flake-system.nix
+          ./flake-home-manager.nix
         ];
       };
     };
