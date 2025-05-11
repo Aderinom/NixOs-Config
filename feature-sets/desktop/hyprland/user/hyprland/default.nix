@@ -21,6 +21,7 @@ in {
     pkgs.hyprlandPlugins.hyprwinwrap
   ];
 
+
   wayland.windowManager.hyprland.settings = {
     # Let hypr directly source the file from the nix flake
     source = "${hyprDir}/hyprland-dyn.conf";
@@ -39,9 +40,9 @@ in {
 
   home.packages = with pkgs; [
     wayland
+    rose-pine-hyprcursor
 
     nautilus
-
     hyprcursor
     hyprlock
     hypridle
