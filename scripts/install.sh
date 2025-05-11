@@ -10,6 +10,7 @@ rootDir=$(pwd);
 
 #Make flake variables and hardware config not stageable
 git update-index --skip-worktree hardware-configuration.nix
+git update-index --skip-worktree hardware-extra-configuration.nix
 git update-index --skip-worktree flake-variables.nix
 
 # Check that ./hardware-configuration.nix was updated
