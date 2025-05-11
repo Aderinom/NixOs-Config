@@ -1,6 +1,4 @@
-{
-  ...
-}: {
+{...}: {
   programs.wofi.enable = true;
 
   # NOTE: Wofi seems to not follow symlinks - so we need to actually pass the config

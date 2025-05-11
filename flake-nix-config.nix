@@ -12,7 +12,7 @@
     ./hardware-configuration.nix
     outputs.my.modules.nixos # Load our custom modues
   ];
-  
+
   nixpkgs = {
     overlays = [
       inputs.nur.overlays.default

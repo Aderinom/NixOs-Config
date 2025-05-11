@@ -4,7 +4,7 @@
   outputs,
   vars,
   ...
-}: let 
+}: let
   enabledModules = import ./feature-sets/enabled.nix;
 in {
   imports = [
@@ -20,15 +20,17 @@ in {
 
     users.${vars.username} = {
       programs.home-manager.enable = true;
-      
+
       home.stateVersion = vars.home-mgr-state-version;
 
       home.username = "${vars.username}";
       home.homeDirectory = "/home/${vars.username}";
 
-      imports = [
-        outputs.my.modules.home-manager
-      ] ++ enabledModules.userImports;
+      imports =
+        [
+          outputs.my.modules.home-manager
+        ]
+        ++ enabledModules.userImports;
     };
   };
 

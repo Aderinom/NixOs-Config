@@ -1,7 +1,4 @@
-{
-  vars,
-  ...
-}: {
+{vars, ...}: {
   programs.git.enable = true;
   programs.git.userEmail = vars.gitMail;
   programs.git.userName = vars.gitName;

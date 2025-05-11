@@ -3,12 +3,11 @@
   vars,
   ...
 }: {
-
   users.users."${vars.username}".extraGroups = ["networkmanager"];
   networking = {
     hostName = "${vars.host}";
     networkmanager.enable = true;
-  
+
     nameservers = [
       "1.1.1.1"
       "8.8.8.8"
