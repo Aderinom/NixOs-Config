@@ -47,7 +47,9 @@ You will have to add the variable to the `flake-variables.nix`
 └── nix-config.nix   -- Sets up nixpkgs
 ```
 
-## 
+## Hardware
+
+If using Gaming Laptops, you might want to take a look at: https://github.com/NixOS/nixos-hardware/tree/master
 
 
 

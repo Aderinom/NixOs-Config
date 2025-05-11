@@ -50,10 +50,12 @@
         specialArgs = {inherit inputs outputs vars;};
         modules = [
           inputs.nix-index-database.nixosModules.nix-index
+          ./hardware-configuration.nix
+          ./hardware-extra-configuration.nix
           ./flake-nix-config.nix
-          ./hosts/laptop
           ./flake-system.nix
           ./flake-home-manager.nix
+          ./hosts/laptop
         ];
       };
 
@@ -61,10 +63,11 @@
         specialArgs = {inherit inputs outputs vars;};
         modules = [
           inputs.nix-index-database.nixosModules.nix-index
+          ./hardware-configuration.nix
           ./flake-nix-config.nix
-          ./hosts/vm
           ./flake-system.nix
           ./flake-home-manager.nix
+          ./hosts/vm
         ];
       };
     };

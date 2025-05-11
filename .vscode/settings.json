@@ -1,6 +1,6 @@
 {
     "css.validate": false,
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
     "explorer.confirmPasteNative": false,
     "nix.enableLanguageServer": true,
     "nix.serverPath": "nixd",

@@ -11,7 +11,9 @@
   services.hardware.bolt.enable = true;
 
   services.xserver.enable = true;
-  services.xserver.videoDrivers = ["displaylink" "modesetting"];
+  services.xserver.videoDrivers = 
+    (if vars.uses-nvidia-gpu then ["nvidia"] else []) ++ ["displaylink" "modesetting"];
+
   services.xserver.xkb.layout = vars.kbdLayout;
 
   # Enable displaylink (https://wiki.nixos.org/wiki/Displaylink)
