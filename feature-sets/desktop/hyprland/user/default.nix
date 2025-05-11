@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = [
-    # inputs.hyprland.homeManagerModules.default
+    ./gtk.nix
     ./keyring.nix
     ./session-variables.nix
     ./cava
