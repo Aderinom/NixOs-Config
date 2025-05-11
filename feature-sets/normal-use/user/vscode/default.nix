@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  currentFolder = "${vars.flakeRoot}/feature-sets/user/home/vscode";
+  currentFolder = "${vars.flakeRoot}/feature-sets/normal-use/user/vscode";
 in {
   programs.vscode.enable = true;
   programs.vscode.package = pkgs.vscode.fhs;

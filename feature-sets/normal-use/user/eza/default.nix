@@ -9,5 +9,5 @@
   programs.eza.extraOptions = ["--group-directories-first" "--header"];
 
   xdg.configFile."eza/theme.yml".source =
-    config.lib.file.mkOutOfStoreSymlink "${vars.flakeRoot}/feature-sets/user/home/eza/theme.yml";
+    config.lib.file.mkOutOfStoreSymlink "${vars.flakeRoot}/feature-sets/normal-use/user/eza/theme.yml";
 }
