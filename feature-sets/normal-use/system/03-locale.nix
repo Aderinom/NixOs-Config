@@ -1,4 +1,4 @@
-{...}: {
+{vars, ...}: {
   time.timeZone = "Europe/Berlin";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -14,5 +14,5 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  console.keyMap = "de";
+  console.keyMap = vars.kbdLayout;
 }

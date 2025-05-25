@@ -21,12 +21,14 @@ in {
     pkgs.hyprlandPlugins.hyprwinwrap
   ];
 
-
   wayland.windowManager.hyprland.settings = {
     # Let hypr directly source the file from the nix flake
     source = "${hyprDir}/hyprland-dyn.conf";
     "$scriptsDir" = scriptsDir;
     env = "HYPRCURSOR_THEME,rose-pine-hyprcursor";
+    input = {
+      kb_layout = vars.kbdLayout;
+    };
   };
 
   xdg.configFile."hypr/hyprlock.conf".source =
