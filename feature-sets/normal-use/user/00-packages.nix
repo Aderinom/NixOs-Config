@@ -75,8 +75,8 @@
     ## Programming
     # Typescript
     unstable.bun
-    nodejs_23
-    corepack_23
+    nodejs_latest
+    corepack_latest
     pnpm_10
 
     #Rust

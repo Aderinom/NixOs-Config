@@ -3,21 +3,25 @@
   vars,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
-    displaylink
-  ];
+  # environment.systemPackages = with pkgs; [
+  # ];
 
   # Enable Thunderbolt
   services.hardware.bolt.enable = true;
 
   services.xserver.enable = true;
-  services.xserver.videoDrivers = 
-    (if vars.uses-nvidia-gpu then ["nvidia"] else []) ++ ["displaylink" "modesetting"];
+  services.xserver.videoDrivers =
+    (
+      if vars.uses-nvidia-gpu
+      then ["nvidia"]
+      else []
+    )
+    ++ ["modesetting"];
 
   services.xserver.xkb.layout = vars.kbdLayout;
 
   # Enable displaylink (https://wiki.nixos.org/wiki/Displaylink)
-  systemd.services.dlm.wantedBy = ["multi-user.target"];
+  # systemd.services.dlm.wantedBy = ["multi-user.target"];
 
   services.libinput.enable = true;
 
