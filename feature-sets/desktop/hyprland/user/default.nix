@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = [
-    ./gtk.nix
+    ./themes.nix
     ./keyring.nix
     ./session-variables.nix
     ./cava
