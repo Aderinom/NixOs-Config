@@ -19,6 +19,10 @@
     psmisc
     dialog
     tldr
+    tealdeer
+    yazi
+    ripgrep
+    ripgrep-all
 
     # Niche Cli Commands
     pamixer # pulseaudio command line mixer
@@ -26,6 +30,8 @@
     ffmpeg
     yt-dlp-light
     openssl
+    hyperfine #CLI Benchmarking tool
+    presenterm #CLI Slideshow tool
 
     # Other
     man-pages
@@ -41,6 +47,7 @@
     programmer-calculator #pcalc
     tdf # cli pdf viewer
     wavemon # monitoring for wireless network devices
+    yazi
 
     # CLI Toys
     imv # image viewer
