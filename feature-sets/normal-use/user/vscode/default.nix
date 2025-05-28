@@ -16,6 +16,9 @@ in {
   xdg.configFile."Code/User/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${currentFolder}/user/settings.json";
 
+  home.file.".vscode/argv.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${currentFolder}/argv.json";
+
   # On switch, run the setup-extension script with vscode in its path
   # Doesn't seem to work correcly
   # home.activation.installVSCodeExtensions = lib.hm.dag.entryAfter ["writeBoundary"] ''

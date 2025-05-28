@@ -1,0 +1,8 @@
+// This configuration file allows you to pass permanent command line arguments to VS Code.
+// Only a subset of arguments is currently supported to reduce the likelihood of breaking
+// the installation.
+{
+    "enable-crash-reporter": true,
+    "crash-reporter-id": "9b568cf4-7de1-417f-8355-28314eb16490",
+    "password-store": "gnome-libsecret"
+}
