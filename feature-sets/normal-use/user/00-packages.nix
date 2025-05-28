@@ -72,7 +72,6 @@
     spotify
 
     ## GUI Apps
-    chromium
     audacity
     nix-prefetch-github
     soundwireserver
