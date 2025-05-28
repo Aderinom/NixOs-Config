@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./chromium
     ./01-bootloader.nix
     ./02-hardware.nix
     ./03-locale.nix

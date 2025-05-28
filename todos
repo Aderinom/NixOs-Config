@@ -1,14 +1,14 @@
 # Todos
-[] Fix: vscode extension setup
+
+[] Feat: Logiops File
+
+[] Fix: Vscode extension setup
 [] Fix: VM hyprland failing due to symlinking
 [] Fix: Man-Cache taking too long
 
 [] Feat?: Mixed Module system (file being able to export both nix config and user configs) - maybe homemanager.programs.x.enable
 
 [] Feat: Better Wal with contrast and semantic logic
-[] Feat: Chromium auto extensions? - or alternative browser
-[] Feat: Gaming
-
 [] Style: Authentication prompt styling
 [] Style: Notification styling
 [] Style: SwayOSd <https://github.com/ErikReider/SwayOSD>
