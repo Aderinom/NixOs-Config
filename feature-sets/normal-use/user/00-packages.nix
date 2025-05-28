@@ -18,7 +18,6 @@
     traceroute
     psmisc
     dialog
-    tldr
     tealdeer
     yazi
     ripgrep
