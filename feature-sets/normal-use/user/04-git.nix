@@ -3,6 +3,7 @@
   programs.git.userEmail = vars.gitMail;
   programs.git.userName = vars.gitName;
   programs.git.lfs.enable = true;
+  programs.git.delta.enable = true;
 
   programs.git.extraConfig = {
     commit.gpgsign = true;
