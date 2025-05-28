@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p jq git nh pywal swww
+#!nix-shell -i bash -p jq git pywal swww
 # shellcheck shell=bash
 
 set -e
@@ -62,8 +62,9 @@ touch "/home/$username/.cache/wal/colors-hyprland"
 mkdir -p "/home/$username/.config/" 
 touch "/home/$username/.config/monitors.conf"
 
-# Actual install 
-nh os switch -H "$flake_type" . 
+# Actual install
+
+sudo nixos-rebuild switch --flake ".#$flake_type"
 
 # Try Generatig colorscheme and setting the background
 wal -i ./assets/wallpapers/default.jpg -n
