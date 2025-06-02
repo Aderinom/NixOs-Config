@@ -107,6 +107,7 @@
     "format-off": "BT-off",
     "format-disabled": "󰂲",
     "format-connected-battery": "{device_battery_percentage}% 󰂯",
+    "format-no-controller": "",
     "format-alt": "{device_alias} 󰂯",
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
