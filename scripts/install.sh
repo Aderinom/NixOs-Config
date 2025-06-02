@@ -63,8 +63,10 @@ mkdir -p "/home/$username/.config/"
 touch "/home/$username/.config/monitors.conf"
 
 # Actual install
-
 sudo nixos-rebuild switch --flake ".#$flake_type"
+
+# Save used flake type
+echo "$flake_type" > .flake-type
 
 # Try Generatig colorscheme and setting the background
 wal -i ./assets/wallpapers/default.jpg -n
