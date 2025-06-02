@@ -1,15 +1,10 @@
-let
-  # A bit of a specialized setup but -
-  # import all the modules you want to enable here
-  mods = [
-    (import ./desktop/hyprland)
-    (import ./normal-use)
-    (import ./personal-use)
-  ];
+{vars, ...}: let
+  # Collect all enabled feature sets
+  featureSets = builtins.map import vars.enabled-features;
 
-  getAllSystemImports = mods: builtins.concatMap (mod: mod.systemImports or []) mods;
-  getAllUserImports = mods: builtins.concatMap (mod: mod.userImports or []) mods;
+  # Extract systemImports and userImports from each module
+  systemImports = builtins.concatMap (mod: mod.systemImports or []) featureSets;
+  userImports = builtins.concatMap (mod: mod.userImports or []) featureSets;
 in {
-  systemImports = getAllSystemImports mods;
-  userImports = getAllUserImports mods;
+  inherit systemImports userImports;
 }

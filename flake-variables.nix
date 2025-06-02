@@ -4,23 +4,32 @@
   ];
 
   flakeRoot = "/home/user/.nixos-config"; # Absolute Path of the flake - I personally like /home/<user>/.nixos-config
-  username = "user";        # Your desired user name
+  username = "user"; # Your desired user name
 
-  gitName = "git user";     # Desired git user name
-  gitMail = "git@git.git";  # Desired git mail 
+  gitName = "git user"; # Desired git user name
+  gitMail = "git@git.git"; # Desired git mail
 
-  host = "host";            # Desired hostname
-  kbdLayout = "de,us";      # Desired Keyboard Layout
+  host = "host"; # Desired hostname
+  kbdLayout = "de,us"; # Desired Keyboard Layout
 
   nix-state-version = "xx.xx"; # Nix Version of initial nixos installation see [1]
   home-mgr-state-version = "xx.xx"; # Home Manager Version of initial install see [2]
-}
 
+  uses-nvidia-gpu = false;
+
+  # Add the feature sets you want to use here.
+  enabled-features = [
+    ./feature-sets/desktop/hyprland
+    ./feature-sets/normal-use
+    #./feature-sets/personal-use
+    #./feature-sets/professional-use
+  ];
+}
 /**
 
 [1] State Version <https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion>
 
-  
+
   When do I update stateVersion
   Keep stateVersion to the version you originally installed.[1]
 
@@ -55,6 +64,5 @@
   You should not change this value, even if you update Home Manager. If you do
   want to update the value, then make sure to first check the Home Manager
   release notes.
+*/
 
-
- */

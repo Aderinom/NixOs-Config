@@ -1,6 +1,6 @@
 # The Underlying default configuration for any system
-let
-  enabledModules = import ./feature-sets/enabled.nix;
+{vars, ...}: let
+  enabledModules = import ./feature-sets/enabled.nix {inherit vars;};
 in {
   imports = enabledModules.systemImports;
 }

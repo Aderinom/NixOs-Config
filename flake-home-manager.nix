@@ -5,7 +5,7 @@
   vars,
   ...
 }: let
-  enabledModules = import ./feature-sets/enabled.nix;
+  enabledModules = import ./feature-sets/enabled.nix {inherit vars;};
 in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
