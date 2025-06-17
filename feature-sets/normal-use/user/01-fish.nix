@@ -2,11 +2,12 @@
   programs.direnv.enable = true;
 
   # programs.direnv.enableFishIntegration = true;
+
   programs.fish = {
     enable = true;
     generateCompletions = true;
     shellInit = "
-          export GITLAB_USER=\"akelbsch\"
+        set fish_greeting
       ";
 
     shellAliases = {

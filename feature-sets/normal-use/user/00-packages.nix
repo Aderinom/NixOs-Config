@@ -24,7 +24,6 @@
     ripgrep-all
 
     # Niche Cli Commands
-    pamixer # pulseaudio command line mixer
     playerctl # controller for media players
     ffmpeg
     yt-dlp-light

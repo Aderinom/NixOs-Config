@@ -1,0 +1,5 @@
+{
+  systemImports = [
+    ./system.nix
+  ];
+}

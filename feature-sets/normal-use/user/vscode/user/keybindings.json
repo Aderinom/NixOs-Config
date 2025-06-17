@@ -394,6 +394,11 @@
         "when": "editorTextFocus"
     },
     {
+        "key": "alt+\\",
+        "command": "editor.action.showHover",
+        "when": "editorTextFocus"
+    },
+    {
         "key": "ctrl+k ctrl+i",
         "command": "-editor.action.showHover",
         "when": "editorTextFocus"

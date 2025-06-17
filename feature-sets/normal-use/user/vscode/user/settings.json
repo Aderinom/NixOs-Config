@@ -33,13 +33,10 @@
   "hediet.vscode-drawio.resizeImages": null,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "remote.autoForwardPortsSource": "hybrid",
-  "files.exclude": {
-    "**/.*": false
-  },
   "rustMacroExpand.displayCargoCommand": true,
   "git.autofetch": true,
   "git.enableSmartCommit": true,
-  "git.openRepositoryInParentFolders": "never",
+  "git.openRepositoryInParentFolders": "always",
   "git.confirmSync": false,
   "git.replaceTagsWhenPull": true,
   "diffEditor.ignoreTrimWhitespace": false,
@@ -88,5 +85,23 @@
     "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode"
   },
   "git.blame.editorDecoration.enabled": true,
-  "git.blame.editorDecoration.template": "(${authorDateAgo}) ${authorName} : ${subject}"
+  "git.blame.editorDecoration.template": "(${authorDateAgo}) ${authorName} : ${subject}",
+  "files.exclude": {
+    "**/.git": false,
+    "**/.svn": false,
+    "**/.hg": false,
+    "**/.DS_Store": false,
+    "**/Thumbs.db": false,
+    "**/.*": false
+  },
+  "cSpell.userWords": [
+    "dataplanes",
+    "mgmt",
+    "pocketscion",
+    "rustls"
+  ],
+  "cSpell.enabledNotifications": {
+    "Maximum Word Length Exceeded": false
+  },
+  "biome.suggestInstallingGlobally": false
 }

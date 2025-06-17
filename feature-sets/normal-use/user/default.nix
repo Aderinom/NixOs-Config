@@ -11,5 +11,7 @@
     ./04-git.nix
     ./05-neovim.nix
     ./06-wine.nix
+    ./07-audio.nix
+    ./08-gpg.nix
   ];
 }
