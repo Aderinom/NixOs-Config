@@ -6,6 +6,11 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nur.url = "github:nix-community/NUR";
 
+    solaar = {
+      url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz"; # For latest stable version
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
