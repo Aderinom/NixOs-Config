@@ -56,7 +56,7 @@
         modules = [
           inputs.nix-index-database.nixosModules.nix-index
           ./hardware-configuration.nix
-          ./hardware-extra-configuration.nix
+          ./flake-local.nix
           ./flake-nix-config.nix
           ./flake-system.nix
           ./flake-home-manager.nix
@@ -69,7 +69,7 @@
         modules = [
           inputs.nix-index-database.nixosModules.nix-index
           ./hardware-configuration.nix
-          ./hardware-extra-configuration.nix
+          ./flake-local.nix
           ./flake-nix-config.nix
           ./flake-system.nix
           ./flake-home-manager.nix
@@ -82,6 +82,7 @@
         modules = [
           inputs.nix-index-database.nixosModules.nix-index
           ./hardware-configuration.nix
+          ./flake-local.nix
           ./flake-nix-config.nix
           ./flake-system.nix
           ./flake-home-manager.nix
