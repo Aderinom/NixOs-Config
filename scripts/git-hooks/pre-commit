@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# This hook prevents committing changes to files meant for local use only.
+# 
+# Since files need to be staged for flakes, .gitignore can not be used.
+# Same counts for --skip-worktree as that will also prevent any changes to be visible to nix.
+
+blocked_files=("import-normal.nix" "flake-local.nix" "flake-variables.nix")
+
+staged=$(git diff --cached --name-only)
+
+for file in $staged; do
+    for blocked in "${blocked_files[@]}"; do
+        if [[ "$file" == "$blocked" ]]; then
+            echo "Unstaging local-only file: $file"
+            git restore --staged "$file"
+            break
+        fi
+    done
+done
+
+# Abort if commit is empty
+if [ -z "$(git diff --cached --name-only)" ]; then
+    echo "Aborting commit: no files left to commit"
+    exit 1
+fi
+
+exit 0
