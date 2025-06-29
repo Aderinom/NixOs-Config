@@ -5,7 +5,7 @@
 # Since files need to be staged for flakes, .gitignore can not be used.
 # Same counts for --skip-worktree as that will also prevent any changes to be visible to nix.
 
-blocked_files=("import-normal.nix" "flake-local.nix" "flake-variables.nix")
+blocked_files=("hardware-configuration.nix" "flake-local.nix" "flake-variables.nix")
 
 staged=$(git diff --cached --name-only)
 
