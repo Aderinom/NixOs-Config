@@ -5,6 +5,7 @@
   "editor.fontFamily": "'DroidSansM Nerd Font', 'monospace', monospace",
   "explorer.confirmDelete": false,
   "tabnine.experimentalAutoImports": true,
+  "git.autorefresh": true,
   "dev.containers.mountWaylandSocket": false,
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
@@ -98,13 +99,16 @@
     "**/.*": false
   },
   "cSpell.userWords": [
+    "asns",
     "dataplanes",
     "mgmt",
     "pocketscion",
-    "rustls"
+    "rustls",
+    "SCMP",
+    "topo"
   ],
   "cSpell.enabledNotifications": {
     "Maximum Word Length Exceeded": false
   },
-  "biome.suggestInstallingGlobally": false
+  "biome.suggestInstallingGlobally": false,
 }
