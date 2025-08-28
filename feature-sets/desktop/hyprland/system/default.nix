@@ -30,4 +30,6 @@ in {
   };
 
   security.pam.services.hyprlock = {};
+
+  services.gvfs.enable = true;
 }

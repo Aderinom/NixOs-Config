@@ -72,7 +72,7 @@
         "command": [
           "alejandra"
         ]
-      },
+      }
     }
   },
   "workbench.sideBar.location": "right",
@@ -98,17 +98,14 @@
     "**/Thumbs.db": false,
     "**/.*": false
   },
-  "cSpell.userWords": [
-    "asns",
-    "dataplanes",
-    "mgmt",
-    "pocketscion",
-    "rustls",
-    "SCMP",
-    "topo"
-  ],
   "cSpell.enabledNotifications": {
     "Maximum Word Length Exceeded": false
   },
   "biome.suggestInstallingGlobally": false,
+  "githubPullRequests.pullBranch": "never",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "rust-analyzer.rustfmt.extraArgs": [
+    "+nightly-2025-07-07"
+  ],
+  "cue.formatTool": "cue fmt",
 }

@@ -22,6 +22,8 @@
     yazi
     ripgrep
     ripgrep-all
+    tree
+    nmap
 
     # Niche Cli Commands
     playerctl # controller for media players
@@ -56,13 +58,14 @@
     cmatrix # terminal screensaver
     pipes # terminal screensaver
     tty-clock # cli clock
+    lolcat
 
     # Libs
     libappindicator
     libnotify
     poweralertd
 
-    # GUI Programms
+    # GUI Programs
     dbeaver-bin
     remmina
     drawio

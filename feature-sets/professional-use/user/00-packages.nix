@@ -3,5 +3,6 @@
     slack
     pass
     gh
+    protobuf
   ];
 }
