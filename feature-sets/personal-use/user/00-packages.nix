@@ -3,5 +3,6 @@
     whatsapp-for-linux
     discord
     telegram-desktop
+    prismlauncher
   ];
 }
