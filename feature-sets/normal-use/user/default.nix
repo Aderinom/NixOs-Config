@@ -13,5 +13,6 @@
     ./06-wine.nix
     ./07-audio.nix
     ./08-gpg.nix
+    ./09-lg-solaar.nix
   ];
 }
