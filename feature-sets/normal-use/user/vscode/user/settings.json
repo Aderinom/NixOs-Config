@@ -11,10 +11,10 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -37,6 +37,7 @@
   "hediet.vscode-drawio.resizeImages": null,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "remote.autoForwardPortsSource": "hybrid",
+  "remote.SSH.enableAgentForwarding": true,
   "rustMacroExpand.displayCargoCommand": true,
   "git.autofetch": true,
   "git.enableSmartCommit": true,
@@ -102,10 +103,37 @@
     "Maximum Word Length Exceeded": false
   },
   "biome.suggestInstallingGlobally": false,
+  "remote.SSH.remotePlatform": {
+    "workhost": "linux",
+    "strato-tail": "linux"
+  },
+  "editor.tabSize": 2,
+  "editor.detectIndentation": true,
+  "editor.indentSize": "tabSize",
+  "editor.insertSpaces": true,
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "rust-analyzer.assist.preferSelf": true,
+  "rust-analyzer.completion.autoimport.exclude": [
+    "anyhow::Ok",
+    {
+      "path": "core::borrow::Borrow",
+      "type": "methods"
+    },
+    {
+      "path": "core::borrow::BorrowMut",
+      "type": "methods"
+    }
+  ],
+  "rust-analyzer.lens.references.adt.enable": true,
+  "rust-analyzer.lens.references.trait.enable": true,
+  "rust-analyzer.lens.references.method.enable": true,
+  "rust-analyzer.lens.references.enumVariant.enable": true,
+  "rust-analyzer.statusBar.clickAction": "stopServer",
+  "rust-analyzer.completion.callable.snippets": "add_parentheses",
   "githubPullRequests.pullBranch": "never",
   "github.copilot.nextEditSuggestions.enabled": true,
   "rust-analyzer.rustfmt.extraArgs": [
     "+nightly-2025-07-07"
   ],
-  "cue.formatTool": "cue fmt",
+  "cue.formatTool": "cue fmt"
 }
