@@ -21,6 +21,7 @@
     ./17-printer.nix
     ./18-scanner.nix
     ./19-logitech.nix
+    ./20-tailscale
     ./98-programs.nix
     ./99-services.nix
   ];
