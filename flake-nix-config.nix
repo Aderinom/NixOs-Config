@@ -9,11 +9,17 @@
   system.stateVersion = vars.nix-state-version;
 
   imports = [
+    inputs.nix-index-database.nixosModules.nix-index
     outputs.my.modules.nixos # Load our custom modues
+    ./hardware-configuration.nix
+    ./flake-local.nix
+    ./flake-system.nix
+    ./flake-home-manager.nix
   ];
 
   nixpkgs = {
     overlays = [
+      inputs.nix-alien.overlays.default
       inputs.nur.overlays.default
       outputs.my.overlays.additions # Adds our custom packages to nixpkgs
       outputs.my.overlays.modifications # Applies our overlays
