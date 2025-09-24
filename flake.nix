@@ -13,8 +13,9 @@
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
-    nix-alien.url = "github:thiagokokada/nix-alien";
-    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-alien.url = "github:thiagokokada/nix-alien"; # Unpatched binary runner
+    nix-init.url = "github:nix-community/nix-init"; # Auto PKG generator
+    nix-index-database.url = "github:nix-community/nix-index-database"; # Fast package search
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager = {
