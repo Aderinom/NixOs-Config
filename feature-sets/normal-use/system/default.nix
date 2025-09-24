@@ -11,7 +11,7 @@
     ./07-audio.nix
     ./08-security.nix
     ./09-nix-tools.nix
-    ./10-nix-ld.nix
+    ./10-nix-compat.nix
     ./11-fish.nix
     ./12-headsetcontrol.nix
     ./13-fonts.nix
