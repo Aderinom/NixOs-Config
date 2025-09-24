@@ -23,7 +23,6 @@
     hashcat # GPU-accelerated password cracker
     aircrack-ng # WiFi key cracking
     hydra # Network logon cracker
-    hydra-gtk # GUI for Hydra
 
     # Web
     amass # Subdomain enumeration
