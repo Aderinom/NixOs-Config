@@ -3,6 +3,7 @@
     ./chromium
     ./eza
     ./starship
+    ./firefox
     ./vscode
     ./00-packages.nix
     ./01-fish.nix

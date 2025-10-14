@@ -105,7 +105,8 @@
   "biome.suggestInstallingGlobally": false,
   "remote.SSH.remotePlatform": {
     "workhost": "linux",
-    "strato-tail": "linux"
+    "strato-tail": "linux",
+    "workhost-tail": "linux"
   },
   "editor.tabSize": 2,
   "editor.detectIndentation": true,
@@ -135,5 +136,9 @@
   "rust-analyzer.rustfmt.extraArgs": [
     "+nightly-2025-07-07"
   ],
-  "cue.formatTool": "cue fmt"
+  "cue.formatTool": "cue fmt",
+  "errorLens.enabledDiagnosticLevels": [
+    "error",
+    "info"
+  ]
 }
