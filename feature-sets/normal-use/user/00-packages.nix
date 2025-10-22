@@ -24,6 +24,8 @@
     ripgrep-all
     tree
     nmap
+    iftop
+    inetutils
 
     # Niche Cli Commands
     playerctl # controller for media players
