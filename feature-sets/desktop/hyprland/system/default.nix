@@ -10,6 +10,7 @@ in {
   imports = [
     ./display-manager.nix
     ./keyd.nix
+    ./earlyoom.nix
   ];
 
   # Hyprland uses unstable nixpgks - this changes the mesa driver to the one hyprland uses

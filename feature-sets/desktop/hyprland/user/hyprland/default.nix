@@ -46,6 +46,8 @@ in {
     wayland
     rose-pine-hyprcursor
 
+    gnome-disk-utility
+
     nautilus
     hyprcursor
     hyprlock
