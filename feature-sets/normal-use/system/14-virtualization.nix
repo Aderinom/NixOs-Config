@@ -20,6 +20,7 @@
     minikube
     lazydocker
     qemu
+    quickemu
   ];
 
   # Docker

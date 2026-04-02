@@ -80,6 +80,7 @@
     nix-prefetch-github
     soundwireserver
     vlc
+    obsidian
 
     ## Programming
     # Typescript

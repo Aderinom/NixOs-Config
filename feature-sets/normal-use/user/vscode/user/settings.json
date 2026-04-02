@@ -140,5 +140,25 @@
   "errorLens.enabledDiagnosticLevels": [
     "error",
     "info"
-  ]
+  ],
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorTheme": "Material Theme High Contrast",
+  "hexeditor.columnWidth": 4,
+  "hexeditor.showDecodedText": false,
+  "hexeditor.defaultEndianness": "little",
+  "hexeditor.inspectorType": "aside",
+  "rust-analyzer.completion.fullFunctionSignatures.enable": true,
+  "rust-analyzer.inlayHints.genericParameterHints.lifetime.enable": true,
+  "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
+  "chat.tools.terminal.autoApprove": {
+    "cargo test": true,
+    "cargo check": true
+  },
+  "gopls": {}
 }

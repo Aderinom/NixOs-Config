@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   programs.firefox.enable = true;
+  programs.firefox.package = pkgs.unstable.firefox;
   programs.firefox.policies = {
     DisableTelemetry = true;
     DisableFirefoxStudies = true;

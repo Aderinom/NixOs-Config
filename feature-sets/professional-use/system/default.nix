@@ -4,5 +4,7 @@
     ./01-onepass.nix
     ./02-envfs.nix
     ./04-virtualbox.nix
+    ./05-android.nix
+    ./06-lxd.nix
   ];
 }

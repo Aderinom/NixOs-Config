@@ -2,7 +2,8 @@
   home.packages = with pkgs; [
     whatsapp-for-linux
     discord
-    telegram-desktop
+    unstable.telegram-desktop
     prismlauncher
+    nexusmods-app-unfree
   ];
 }
