@@ -25,6 +25,10 @@
       outputs.my.overlays.modifications # Applies our overlays
       outputs.my.overlays.unstable-packages # Allows to  use unstable packages through pkgs.unstable
     ];
+
+    config = {
+      android_sdk.accept_license = true;
+    };
   };
 
   nix = {
@@ -59,6 +63,6 @@
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.permittedInsecurePackages = [
-    "electron-33.4.11"
+    "electron-36.9.5"
   ];
 }

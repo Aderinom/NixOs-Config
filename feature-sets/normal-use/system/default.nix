@@ -22,6 +22,8 @@
     ./18-scanner.nix
     ./19-logitech.nix
     ./20-tailscale.nix
+    ./21-disk-tuning.nix
+    ./22-ddcutil.nix
     ./98-programs.nix
     ./99-services.nix
   ];
