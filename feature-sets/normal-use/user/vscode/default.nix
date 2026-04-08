@@ -6,9 +6,18 @@
   ...
 }: let
   currentFolder = "${vars.flakeRoot}/feature-sets/normal-use/user/vscode";
+  vscodePkg =
+    (pkgs.vscode.override (prev: {
+      commandLineArgs =
+        (prev.commandLineArgs or "")
+        + " --enable-features=UseOzonePlatform"
+        + " --ozone-platform=wayland"
+        + " --enable-wayland-ime"
+        + " --use-angle=vulkan";
+    })).fhs;
 in {
   programs.vscode.enable = true;
-  programs.vscode.package = pkgs.vscode.fhs;
+  programs.vscode.package = vscodePkg;
 
   xdg.configFile."Code/User/keybindings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${currentFolder}/user/keybindings.json";
