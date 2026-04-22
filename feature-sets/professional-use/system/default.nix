@@ -6,5 +6,6 @@
     ./04-virtualbox.nix
     ./05-android.nix
     ./06-lxd.nix
+    ./07-bazel.nix
   ];
 }

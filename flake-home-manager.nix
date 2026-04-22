@@ -23,6 +23,7 @@ in {
 
       home.stateVersion = vars.home-mgr-state-version;
 
+      home.sessionPath = ["$HOME/.local/bin" "$HOME/.cargo/bin/"];
       home.username = "${vars.username}";
       home.homeDirectory = "/home/${vars.username}";
 

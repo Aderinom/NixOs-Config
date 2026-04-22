@@ -10,6 +10,8 @@
     user.signingkey = "~/.ssh/sign-key.pub";
     gpg.format = "ssh";
 
+    url."ssh://git@github.com/".insteadOf = "https://github.com/";
+
     core.editor = "code";
     core.ignorecase = false;
 
