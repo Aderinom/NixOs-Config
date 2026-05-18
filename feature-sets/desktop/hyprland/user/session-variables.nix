@@ -19,5 +19,6 @@
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
     GRIMBLAST_HIDE_CURSOR = 0;
+    X_CURSOR_SIZE = 36;
   };
 }

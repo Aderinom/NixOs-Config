@@ -5,7 +5,7 @@
     ./02-envfs.nix
     ./04-virtualbox.nix
     ./05-android.nix
-    ./06-lxd.nix
+    ./06-incus.nix
     ./07-bazel.nix
   ];
 }

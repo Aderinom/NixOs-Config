@@ -8,28 +8,28 @@
   "git.autorefresh": true,
   "dev.containers.mountWaylandSocket": false,
   "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "vscode.json-language-features",
   },
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "vscode.json-language-features",
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "vscode.typescript-language-features",
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[markdown]": {
-    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
   },
   "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "vscode.typescript-language-features",
   },
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[java]": {
     "editor.suggest.snippetsPreventQuickSuggestions": false,
@@ -48,7 +48,7 @@
   "redhat.telemetry.enabled": false,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
+    "source.organizeImports": "explicit",
   },
   "rust-analyzer.rustfmt.rangeFormatting.enable": true,
   "rust-analyzer.inlayHints.closureStyle": "rust_analyzer",
@@ -62,17 +62,13 @@
   "rust-analyzer.highlighting.strings": false,
   "rust-analyzer.semanticHighlighting.strings.enable": false,
   "nix.enableLanguageServer": true,
-  "nix.hiddenLanguageServerErrors": [
-    "textDocument/definition"
-  ],
+  "nix.hiddenLanguageServerErrors": ["textDocument/definition"],
   "nix.serverPath": "nixd",
   "nix.formatterPath": "alejandra",
   "nix.serverSettings": {
     "nixd": {
       "formatting": {
-        "command": [
-          "alejandra"
-        ],
+        "command": ["alejandra"],
       },
     },
   },
@@ -80,14 +76,14 @@
   "chat.commandCenter.enabled": false,
   "explorer.autoReveal": true,
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "autoHide.mode": "manual",
   "[dockerfile]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker",
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode"
+    "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode",
   },
   "git.blame.editorDecoration.enabled": true,
   "git.blame.editorDecoration.template": "(${authorDateAgo}) ${authorName} : ${subject}",
@@ -100,13 +96,13 @@
     "**/.*": false,
   },
   "cSpell.enabledNotifications": {
-    "Maximum Word Length Exceeded": false
+    "Maximum Word Length Exceeded": false,
   },
   "biome.suggestInstallingGlobally": false,
   "remote.SSH.remotePlatform": {
     "workhost": "linux",
     "strato-tail": "linux",
-    "workhost-tail": "linux"
+    "workhost-tail": "linux",
   },
   "editor.tabSize": 2,
   "editor.detectIndentation": true,
@@ -118,29 +114,24 @@
     "anyhow::Ok",
     {
       "path": "core::borrow::Borrow",
-      "type": "methods"
+      "type": "methods",
     },
     {
       "path": "core::borrow::BorrowMut",
-      "type": "methods"
+      "type": "methods",
     },
   ],
   "githubPullRequests.pullBranch": "never",
   "github.copilot.nextEditSuggestions.enabled": true,
   "cue.formatTool": "cue fmt",
-  "errorLens.enabledDiagnosticLevels": [
-    "error",
-    "info"
-  ],
+  "errorLens.enabledDiagnosticLevels": ["error", "info"],
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "Material Theme High Contrast",
   "hexeditor.columnWidth": 4,
   "hexeditor.showDecodedText": false,
   "hexeditor.defaultEndianness": "little",
   "hexeditor.inspectorType": "aside",
-  "rust-analyzer.rustfmt.extraArgs": [
-    "+nightly-2025-07-07"
-  ],
+  "rust-analyzer.rustfmt.extraArgs": ["+nightly-2025-07-07"],
   "rust-analyzer.lens.references.adt.enable": true,
   "rust-analyzer.lens.references.trait.enable": true,
   "rust-analyzer.lens.references.method.enable": true,
@@ -156,11 +147,12 @@
     "*": true,
     "plaintext": false,
     "markdown": true,
-    "scminput": false
+    "scminput": false,
   },
   "chat.tools.terminal.autoApprove": {
     "cargo test": true,
-    "cargo check": true
+    "cargo check": true,
   },
-  "gopls": {}
+  "gopls": {},
+  "hidefiles.version": "2.0.0",
 }

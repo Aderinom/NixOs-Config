@@ -4,6 +4,7 @@
   ...
 }: {
   users.users."${vars.username}".extraGroups = ["networkmanager"];
+  networking.nftables.enable = true;
   networking = {
     hostName = "${vars.host}";
     networkmanager.enable = true;
