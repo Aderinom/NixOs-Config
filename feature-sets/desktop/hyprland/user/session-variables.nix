@@ -6,12 +6,10 @@
     _JAVA_AWT_WM_NONEREPARENTING = 1;
     DISABLE_QT5_COMPAT = 0;
     GDK_BACKEND = "wayland,x11";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
     ANKI_WAYLAND = 1;
     DIRENV_LOG_FORMAT = "";
-    WLR_DRM_NO_ATOMIC = 1;
     MOZ_ENABLE_WAYLAND = 1;
-    WLR_BACKEND = "vulkan";
-    WLR_RENDERER = "vulkan";
     WLR_NO_HARDWARE_CURSORS = 1;
     XDG_CURRENT_DESKTOP = "Hyprland";
     XDG_SESSION_TYPE = "wayland";

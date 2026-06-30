@@ -60,15 +60,19 @@
   "rust-analyzer.checkOnSave": true,
   "rust-analyzer.cargo.targetDir": true,
   "rust-analyzer.highlighting.strings": false,
-  "rust-analyzer.semanticHighlighting.strings.enable": false,
+  "rust-analyzer.semanticHighlighting.strings.enable": true,
   "nix.enableLanguageServer": true,
-  "nix.hiddenLanguageServerErrors": ["textDocument/definition"],
+  "nix.hiddenLanguageServerErrors": [
+    "textDocument/definition"
+  ],
   "nix.serverPath": "nixd",
   "nix.formatterPath": "alejandra",
   "nix.serverSettings": {
     "nixd": {
       "formatting": {
-        "command": ["alejandra"],
+        "command": [
+          "alejandra"
+        ],
       },
     },
   },
@@ -124,14 +128,19 @@
   "githubPullRequests.pullBranch": "never",
   "github.copilot.nextEditSuggestions.enabled": true,
   "cue.formatTool": "cue fmt",
-  "errorLens.enabledDiagnosticLevels": ["error", "info"],
+  "errorLens.enabledDiagnosticLevels": [
+    "error",
+    "info"
+  ],
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "Material Theme High Contrast",
   "hexeditor.columnWidth": 4,
   "hexeditor.showDecodedText": false,
   "hexeditor.defaultEndianness": "little",
   "hexeditor.inspectorType": "aside",
-  "rust-analyzer.rustfmt.extraArgs": ["+nightly-2025-07-07"],
+  "rust-analyzer.rustfmt.extraArgs": [
+    "+nightly-2025-07-07"
+  ],
   "rust-analyzer.lens.references.adt.enable": true,
   "rust-analyzer.lens.references.trait.enable": true,
   "rust-analyzer.lens.references.method.enable": true,

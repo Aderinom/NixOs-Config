@@ -2,7 +2,10 @@
   environment.systemPackages = with pkgs; [
     openssl.dev
     pkg-config
-    # #Rust
-    # rustup
+    alsa-utils
+
+    pkg-config
+    webkitgtk_4_1
+    librsvg
   ];
 }

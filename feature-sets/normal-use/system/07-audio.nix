@@ -9,5 +9,9 @@
     # lowLatency.enable = true;
   };
   hardware.alsa.enablePersistence = true;
-  environment.systemPackages = with pkgs; [pulseaudioFull];
+  hardware.firmware = [pkgs.scarlett2-firmware];
+  environment.systemPackages = with pkgs; [
+    pulseaudioFull
+    scarlett2-firmware
+  ];
 }

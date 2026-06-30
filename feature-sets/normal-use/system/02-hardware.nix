@@ -6,6 +6,7 @@
     extraPackages = with pkgs; [
       # Video accelaration
       intel-media-driver
+      nvidia-vaapi-driver
       (vaapiIntel.override {enableHybridCodec = true;})
       # VDPAU to VAAPI Bridge
       vaapiVdpau
