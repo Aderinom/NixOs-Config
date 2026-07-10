@@ -8,6 +8,7 @@
     save = true;
     clear_password = true;
     hide_borders = true;
+    animation = "colormix";
   };
 
   security.pam.services.ly.enableGnomeKeyring = true;

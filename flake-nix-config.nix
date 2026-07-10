@@ -64,5 +64,7 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-36.9.5"
+    "nexusmods-app-unfree-0.21.1"
+    "pnpm-10.29.2"
   ];
 }

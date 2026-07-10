@@ -20,7 +20,6 @@ in {
   wayland.windowManager.hyprland.systemd.enableXdgAutostart = true;
   wayland.windowManager.hyprland.xwayland.enable = true;
   wayland.windowManager.hyprland.plugins = [
-    pkgs.hyprlandPlugins.hyprwinwrap
   ];
 
   wayland.windowManager.hyprland.settings = {

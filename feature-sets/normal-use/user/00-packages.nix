@@ -72,7 +72,7 @@
     remmina
     drawio
     krita
-    onlyoffice-bin
+    onlyoffice-desktopeditors
     spotify
 
     ## GUI Apps
@@ -86,8 +86,7 @@
     # Typescript
     unstable.bun
     nodejs_latest
-    corepack_latest
-    pnpm_10
+    pnpm
 
     #Rust
     rustup

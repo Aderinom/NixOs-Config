@@ -7,9 +7,9 @@
       # Video accelaration
       intel-media-driver
       nvidia-vaapi-driver
-      (vaapiIntel.override {enableHybridCodec = true;})
+      (intel-vaapi-driver.override {enableHybridCodec = true;})
       # VDPAU to VAAPI Bridge
-      vaapiVdpau
+      libva-vdpau-driver
       libvdpau-va-gl
     ];
   };

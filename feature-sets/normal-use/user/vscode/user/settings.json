@@ -133,7 +133,7 @@
     "info"
   ],
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Material Theme High Contrast",
+  "workbench.colorTheme": "Dark Modern",
   "hexeditor.columnWidth": 4,
   "hexeditor.showDecodedText": false,
   "hexeditor.defaultEndianness": "little",
@@ -164,4 +164,14 @@
   },
   "gopls": {},
   "hidefiles.version": "2.0.0",
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://www.schemastore.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://json-schema.org/": true,
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://biomejs.dev": true
+  },
 }
