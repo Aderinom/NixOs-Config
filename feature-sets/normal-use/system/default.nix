@@ -3,7 +3,6 @@
     ./chromium
     ./00-packages.nix
     ./01-bootloader.nix
-    ./02-hardware.nix
     ./03-locale.nix
     ./04-network.nix
     ./05-systemd.nix
