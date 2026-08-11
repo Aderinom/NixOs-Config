@@ -21,6 +21,7 @@
     overlays = [
       inputs.nix-alien.overlays.default
       inputs.nur.overlays.default
+      inputs.spt-linux-guide.overlays.default
       outputs.my.overlays.additions # Adds our custom packages to nixpkgs
       outputs.my.overlays.modifications # Applies our overlays
       outputs.my.overlays.unstable-packages # Allows to  use unstable packages through pkgs.unstable

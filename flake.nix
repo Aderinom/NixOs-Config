@@ -12,6 +12,7 @@
     };
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+    spt-linux-guide.url = "github:rykugur/SPT-Linux-Guide";
 
     nix-alien.url = "github:thiagokokada/nix-alien"; # Unpatched binary runner
     nix-init.url = "github:nix-community/nix-init"; # Auto PKG generator
