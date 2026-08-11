@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
@@ -9,6 +13,8 @@
       "x-scheme-handler/unknown" = "firefox.desktop";
     };
   };
+
+  home.file.".mozilla/firefox/default/search.json.mozlz4".force = lib.mkForce true;
 
   programs.firefox.enable = true;
   programs.firefox.package = pkgs.unstable.firefox;
