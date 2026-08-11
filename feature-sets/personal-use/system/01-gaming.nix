@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  vars,
+  ...
+}: {
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.steam.extraCompatPackages = with pkgs; [
@@ -14,4 +18,6 @@
     bottles
     heroic
   ];
+
+  users.users."${vars.username}".extraGroups = ["gamemode"];
 }
