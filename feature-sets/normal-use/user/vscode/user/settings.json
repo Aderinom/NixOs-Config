@@ -157,6 +157,7 @@
     "plaintext": false,
     "markdown": true,
     "scminput": false,
+    "rust": true
   },
   "chat.tools.terminal.autoApprove": {
     "cargo test": true,
@@ -175,4 +176,5 @@
     "https://biomejs.dev": true
   },
   "claudeCode.preferredLocation": "panel",
+  "diffEditor.renderSideBySide": true,
 }

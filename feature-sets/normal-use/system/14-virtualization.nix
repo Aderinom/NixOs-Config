@@ -21,6 +21,8 @@
     lazydocker
     qemu
     quickemu
+
+    claude-box
   ];
 
   # Docker
