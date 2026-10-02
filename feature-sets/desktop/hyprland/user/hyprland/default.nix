@@ -13,6 +13,7 @@
   scriptsDir = "${vars.flakeRoot}/feature-sets/desktop/hyprland/user/scripts";
 in {
   wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland.configType = "hyprlang";
   wayland.windowManager.hyprland.systemd.enable = true;
   wayland.windowManager.hyprland.portalPackage = null; #https://wiki.hyprland.org/Nix/Hyprland-on-Home-Manager/#using-the-home-manager-module-with-nixos
   wayland.windowManager.hyprland.package = null;
@@ -63,7 +64,7 @@ in {
     brightnessctl
     poweralertd
 
-    swww # Wallpapaer backend
+    awww # Wallpapaer backend
     wf-recorder
 
     cliphist

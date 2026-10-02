@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p jq git pywal swww
+#!nix-shell -i bash -p jq git pywal awww
 # shellcheck shell=bash
 
 set -e
@@ -115,7 +115,7 @@ echo "$flake_type" > .flake-type
 wal -i ./assets/wallpapers/default.jpg -n
 
 echo "Trying to set wallpaper - might fail"
-swww img ./assets/wallpapers/default.jpg || true
+awww img ./assets/wallpapers/default.jpg || true
 
 
 echo 

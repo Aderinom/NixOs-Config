@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
@@ -18,6 +22,9 @@
   gtk.theme.package = pkgs.gnome-themes-extra;
   gtk.cursorTheme.name = "Qogir";
   gtk.iconTheme.name = "Qogir";
+
+  # GTK4 has no theme by default since home-manager 26.05.
+  gtk.gtk4.theme = config.gtk.theme;
 
   gtk.gtk3.extraConfig = {
     Settings = ''

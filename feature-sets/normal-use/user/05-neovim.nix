@@ -4,6 +4,8 @@
   ...
 }: {
   programs.neovim.enable = true;
+  programs.neovim.withRuby = true;
+  programs.neovim.withPython3 = true;
 
   # programs.neovim.plugins = with pkgs.awesomeNeovimPlugins; [
   #   pkgs.neovim

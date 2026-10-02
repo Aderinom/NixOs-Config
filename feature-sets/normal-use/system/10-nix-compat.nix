@@ -9,7 +9,7 @@
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-    inputs.nix-init.packages.${pkgs.system}.nix-init
+    inputs.nix-init.packages.${pkgs.stdenv.hostPlatform.system}.nix-init
     openssl.dev
   ];
 }

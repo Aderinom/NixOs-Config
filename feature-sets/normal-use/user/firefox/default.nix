@@ -17,6 +17,8 @@
   home.file.".mozilla/firefox/default/search.json.mozlz4".force = lib.mkForce true;
 
   programs.firefox.enable = true;
+  # Profiles stay in ~/.mozilla. The XDG path needs a manual move.
+  programs.firefox.configPath = ".mozilla/firefox";
   programs.firefox.package = pkgs.unstable.firefox;
   programs.firefox.policies = {
     DisableTelemetry = true;

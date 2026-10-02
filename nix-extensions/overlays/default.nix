@@ -7,10 +7,18 @@
     displaylink = import ./displaylink/displaylink.nix {inherit final prev;};
   };
 
+  # Replaces inputs.spt-linux-guide.overlays.default. That overlay reads the
+  # deprecated `pkgs.system` and prints an eval warning.
+  spt-packages = _final: prev: let
+    sptPkgs = inputs.spt-linux-guide.packages.${prev.stdenv.hostPlatform.system};
+  in {
+    inherit (sptPkgs) spt-additions spt-server spt-launcher;
+  };
+
   # Allows unstable packages to be accessed with 'pkgs.unstable'
-  unstable-packages = final: _prev: {
+  unstable-packages = _final: prev: {
     unstable = import inputs.nixpkgs-unstable {
-      system = final.system;
+      inherit (prev.stdenv.hostPlatform) system;
       config.allowUnfree = true;
     };
   };

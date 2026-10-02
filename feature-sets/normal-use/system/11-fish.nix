@@ -2,7 +2,7 @@
   users.defaultUserShell = pkgs.fish;
 
   # Disable this cause it takes really long
-  documentation.man.generateCaches = false;
+  documentation.man.cache.enable = false;
 
   programs.nix-index.enable = true;
   programs.ssh.startAgent = true;
