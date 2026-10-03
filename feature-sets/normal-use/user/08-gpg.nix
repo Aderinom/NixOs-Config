@@ -12,4 +12,8 @@
     pinentry-curses
     gnupg
   ];
+
+  home.file.".gnupg/common.conf".text = ''
+    use-keyboxd
+  '';
 }
