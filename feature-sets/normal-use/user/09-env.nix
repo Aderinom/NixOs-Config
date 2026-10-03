@@ -1,3 +1,6 @@
 {
-  home.sessionPath = ["$HOME/.cargo/bin"];
+  home.sessionPath = [
+    "$HOME/.cargo/bin"
+    "$HOME/.local/share/pnpm/bin"
+  ];
 }
