@@ -93,6 +93,25 @@ if (( fresh )) && [[ -f "$HOME/.claude.json" ]]; then
   in_volume 'umask 077; cat > /home/dev/.claude.json' < "$HOME/.claude.json"
 fi
 
+# Merge claude-box defaults into ~/.claude/CLAUDE.md on every run.
+# Keep host-provided content, but enforce one managed defaults block.
+if [[ -f "$CTX/CLAUDE.md" ]]; then
+  in_volume 'umask 077; mkdir -p /home/dev/.claude; touch /home/dev/.claude/CLAUDE.md'
+
+  {
+    printf '\n### BEGIN CLAUDE-BOX DEFAULTS ###\n'
+    cat "$CTX/CLAUDE.md"
+    printf '### END CLAUDE-BOX DEFAULTS ###\n'
+  } | in_volume '
+    set -e
+    file=/home/dev/.claude/CLAUDE.md
+    tmp="$(mktemp)"
+    sed "/^### BEGIN CLAUDE-BOX DEFAULTS ###$/,/^### END CLAUDE-BOX DEFAULTS ###$/d" "$file" > "$tmp"
+    cat "$tmp" - > "$file"
+    rm -f "$tmp"
+  '
+fi
+
 # --- per-run home prep ---------------------------------------------------
 # Create the bind-mount targets first.
 # Docker creates a missing target as a root-owned directory in the volume.
@@ -131,6 +150,7 @@ done
 
 run=(docker run --rm -it --init
      --hostname claude-box
+  --user "$UID_:$GID_"
      --workdir "$PROJECT"
      "${mounts[@]}" "${envs[@]}")
 [[ -n "${CLAUDE_BOX_NETWORK:-}" ]] && run+=(--network "$CLAUDE_BOX_NETWORK")
