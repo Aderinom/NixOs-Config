@@ -4,5 +4,6 @@
     ./01-gaming.nix
     ./02-tailscale.nix
     ./03-tarkov.nix
+    ./04-steamvr.nix
   ];
 }
