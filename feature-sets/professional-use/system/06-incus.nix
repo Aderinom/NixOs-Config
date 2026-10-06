@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{vars, ...}: {
+  users.users.${vars.username}.extraGroups = ["incus-admin"];
+
   virtualisation.incus.enable = true;
   virtualisation.incus.ui.enable = true;
   virtualisation.incus.preseed = {
