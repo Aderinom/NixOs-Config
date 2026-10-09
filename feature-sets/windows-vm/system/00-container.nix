@@ -18,8 +18,12 @@ in {
       image = "dockurr/windows:6.05";
       environment = {
         VERSION = "11";
-        RAM_SIZE = "16G";
-        CPU_CORES = "8";
+        # Under host memory pressure, ballooning takes unused RAM back from Windows, down to 33% of RAM_SIZE.
+        RAM_SIZE = "32G";
+        BALLOONING = "Y";
+        # With RAM_CHECK, a VM that starts while free RAM is short runs with a smaller RAM_SIZE until its next start.
+        RAM_CHECK = "N";
+        CPU_CORES = "28";
         DISK_SIZE = "128G";
         USERNAME = "dev";
         # NAT mode forwards all ports already. This keeps SSH working if dockurr falls back to user-mode networking.
