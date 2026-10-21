@@ -17,9 +17,13 @@ drafts in a code editor. Create the issues only after the user approves.
   Do not draft an issue that already exists.
 - Read the conventions of the repository: the title format in the project
   rules, and the title of the parent. Follow the same format.
-- Number the titles in their order, right after the component prefix, for
-  example `api: 01 add rate limits`. A sub-issue gets the number of its
-  parent as a prefix, for example `api: 02.01 count requests per key`.
+- Number the titles only if the issues of one level have a real order,
+  for example milestones where each one builds on the one before. The
+  number goes right after the component prefix, for example
+  `api: 01 add rate limits`. A sub-issue gets the number of its parent as
+  a prefix, for example `api: 02.01 count requests per key`.
+- Issues that can run in parallel get no number. Give either every issue
+  of one level a number or none.
 - List the labels: `gh label list --repo <owner/repo> --limit 500`. Use only
   labels that exist. Take the team and component labels of the parent.
 - Find the board of the parent: `gh issue view <n> --repo <owner/repo> --json projectItems`.
@@ -54,8 +58,8 @@ issues/
 - The file name is the title in lowercase, without the component prefix
   and without its number, with words joined by `-`. Keep it under 60
   characters.
-- A two-digit prefix keeps the order of the issues. It is the last part of
-  the number in the title.
+- A two-digit prefix keeps the order of the files. If the title has a
+  number, the prefix is the last part of it.
 - The sub-issues of an issue go into a folder with the name of its file and
   the postfix `.sub`. For a parent that exists already, the folder name
   starts with its number.

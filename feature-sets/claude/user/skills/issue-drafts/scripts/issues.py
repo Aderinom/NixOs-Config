@@ -21,7 +21,7 @@ import subprocess
 import sys
 import tempfile
 
-TITLE = re.compile(r"^(?:(?P<component>[^:]+): )?(?P<number>\d{2}(?:\.\d{2})*) (?P<text>\S.*)$")
+TITLE = re.compile(r"^(?:(?P<component>[^:]+): )?(?:(?P<number>\d{2}(?:\.\d{2})*) )?(?P<text>\S.*)$")
 FILE = re.compile(r"^(?P<prefix>\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 SECTIONS = ("## Goal", "## Scope", "## Definition of done")
 KEYS = ("title", "labels", "parent", "status", "issue")
@@ -204,8 +204,8 @@ def check(folder, repo, project):
                 problems.append(f"{where}: no `{key}` in the front matter")
         match = TITLE.match(draft.title)
         if not match:
-            problems.append(f"{where}: the title is not `<component>: <number> <text>`: {draft.title}")
-        elif match.group("number") != draft.number:
+            problems.append(f"{where}: the title is not `<component>: [<number>] <text>`: {draft.title}")
+        elif match.group("number") not in (None, draft.number):
             problems.append(f"{where}: the title has number {match.group('number')}, the file needs {draft.number}")
         text = core(draft.title)
         if text in titles:
@@ -224,6 +224,12 @@ def check(folder, repo, project):
             problems.append(f"{where}: the status `{draft.status}` is not one of {', '.join(board.options)} on {board.title}")
         elif not board and draft.status:
             problems.append(f"{where}: a status, but no board. Pass --project <owner>/<number>.")
+
+    # Number every issue of one level, or none.
+    for level in [drafts, *(draft.children for draft in walk(drafts))]:
+        numbered = [draft for draft in level if TITLE.match(draft.title) and TITLE.match(draft.title).group("number")]
+        if numbered and len(numbered) != len(level):
+            problems.append(f"{os.path.dirname(level[0].path)}: some titles have a number and some do not")
 
     if parent:
         existing = json.loads(gh("api", f"repos/{repo}/issues/{parent}/sub_issues", "--jq", "[.[] | .title]"))
