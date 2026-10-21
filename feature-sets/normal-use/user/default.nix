@@ -1,7 +1,6 @@
 {
   imports = [
     ./chromium
-    ./claude
     ./eza
     ./starship
     ./firefox

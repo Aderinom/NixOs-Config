@@ -4,7 +4,7 @@
   vars,
   ...
 }: let
-  currentFolder = "${vars.flakeRoot}/feature-sets/normal-use/user/claude";
+  currentFolder = "${vars.flakeRoot}/feature-sets/claude/user";
   skillsFolder = "${currentFolder}/skills";
   extraSkills = config.myConfig.claude.extraSkills;
   # Names of the links that the last activation created, so that the next one can remove dropped ones.

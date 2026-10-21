@@ -76,7 +76,7 @@ Cut or replace these on sight:
 - Do not save my preferences or rules as memories. Propose a change to this
   file or to a skill instead. Apply it after I approve.
 - This file and the skills live in my nix config, in
-  `~/.nixos-config/feature-sets/normal-use/user/claude/`. Edit them there.
+  `~/.nixos-config/feature-sets/claude/user/`. Edit them there.
   `~/.claude/` only links to them.
 
 ## 02 Code
