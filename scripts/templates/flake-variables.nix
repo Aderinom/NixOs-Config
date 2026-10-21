@@ -6,13 +6,19 @@
   flakeRoot = "/home/user/.nixos-config"; # Absolute Path of the flake - I personally like /home/<user>/.nixos-config
   username = "user"; # Your desired user name
 
-  # Add the feature sets you want to use here.
-  enabled-features = [
-    ./feature-sets/desktop/hyprland
-    ./feature-sets/normal-use
-    #./feature-sets/personal-use
-    #./feature-sets/professional-use
-  ];
+  # Turn on the feature sets you want to use here. The path of each one is its folder in feature-sets/.
+  features = {
+    desktop.hyprland = true;
+    # desktop.kde6 = true;
+    normal-use = true;
+    # claude = true;
+    # ctf = true;
+    # personal-use = true;
+    # professional-use = true;
+    # sshd = true;
+    # windows-vm = true;
+    # macos-vm = true;
+  };
 
   gitName = "git user"; # Desired git user name
   gitMail = "git@git.git"; # Desired git mail

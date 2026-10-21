@@ -1,11 +1,12 @@
 {
+  lib,
   pkgs,
   inputs,
   outputs,
   vars,
   ...
 }: let
-  enabledModules = import ./feature-sets/enabled.nix {inherit vars;};
+  featureSets = import ./feature-sets {inherit lib vars;};
 in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -31,7 +32,7 @@ in {
         [
           outputs.my.modules.home-manager
         ]
-        ++ enabledModules.userImports;
+        ++ featureSets.userModules;
     };
   };
 
