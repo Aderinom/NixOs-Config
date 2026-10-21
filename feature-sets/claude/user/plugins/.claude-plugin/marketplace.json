@@ -1,0 +1,13 @@
+{
+  "name": "local",
+  "owner": {
+    "name": "Aaron Kelbsch"
+  },
+  "plugins": [
+    {
+      "name": "text-rules",
+      "source": "./text-rules",
+      "description": "Checks the text Claude writes against the writing rules in ~/.claude/CLAUDE.md."
+    }
+  ]
+}

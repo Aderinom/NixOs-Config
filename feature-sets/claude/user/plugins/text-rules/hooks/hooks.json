@@ -1,0 +1,16 @@
+{
+  "description": "At the end of each turn, checks comments, docs, and the chat reply against the writing rules.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "agent",
+            "timeout": 120,
+            "prompt": "Read /home/akelbsch/.nixos-config/feature-sets/claude/user/plugins/text-rules/check.md and follow it.\n\nHook input: $ARGUMENTS"
+          }
+        ]
+      }
+    ]
+  }
+}

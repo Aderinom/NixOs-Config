@@ -1,0 +1,5 @@
+{
+  "name": "text-rules",
+  "version": "0.1.0",
+  "description": "Checks the text Claude writes against the writing rules in ~/.claude/CLAUDE.md."
+}
