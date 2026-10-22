@@ -10,7 +10,7 @@
       enable = true;
       extraArgs = "--keep-since 7d --keep 5";
     };
-    flake = "/home/${vars.username}/.nixos-config";
+    flake = vars.flakeRoot;
   };
 
   environment.systemPackages = with pkgs; [
