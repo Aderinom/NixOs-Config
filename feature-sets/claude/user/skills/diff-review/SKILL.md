@@ -1,6 +1,6 @@
 ---
 name: diff-review
-description: Review a code change for bugs and for the rules in ~/.claude/CLAUDE.md, and report findings as a ranked list. Use when the user asks to review a diff, a branch, a commit, a PR, or files.
+description: Review a code change for bugs and for the rules in ~/.claude/CLAUDE.md and its rules files, and report findings as a ranked list. Use when the user asks to review a diff, a branch, a commit, a PR, or files.
 ---
 
 # Diff review
@@ -10,29 +10,7 @@ asks.
 
 ## Target
 
-- No target given: review `git diff` plus `git diff --staged`. If both are
-  empty, review the current branch against its base.
-- A PR number: use `gh pr diff <n>`. GitHub diffs against the PR base
-  branch, so a stacked PR shows only its own commits.
-- A branch or commit: diff it against its base.
-- A path: review the files as they are, not a diff.
-
-### Base
-
-A branch can sit on top of another feature branch. Its merge base with the
-main branch then pulls in the parent's commits too. So use the nearest local
-branch that is an ancestor as the base:
-
-1. List the candidates with `git for-each-ref --merged <branch> refs/heads`.
-2. Drop the branch itself and any branch at the same commit.
-3. Pick the one with the smallest `git rev-list --count <candidate>..<branch>`.
-4. If no candidate is left, use the merge base with the main branch.
-
-Start the output with one line that names the base branch and its commit.
-The user then sees a wrong base at once.
-
-Read the full file around each hunk. A hunk alone hides the callers, the
-types, and the error paths.
+Load the `diff-target` skill. It finds the change and its base.
 
 ## What to look for
 
@@ -44,8 +22,9 @@ Check in this order. Stop a pass early if it finds nothing.
 3. Tests. A new branch or a bug fix without a test that covers it.
 4. Structure. Placement and names against the `code-structure` skill. Load
    it if the change adds, moves, or renames a unit.
-5. Function layout, comments, and docs against `~/.claude/CLAUDE.md`
-   sections "Function layout" and "Comments and documentation".
+5. Code layout, comments, and docs against
+   `~/.claude/rules/code-layout.md` and
+   `~/.claude/rules/writing.md`.
 6. Simplification. Dead code, duplicate logic, an existing helper that the
    change does not use.
 

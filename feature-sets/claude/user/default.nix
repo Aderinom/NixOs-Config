@@ -30,6 +30,10 @@ in {
     home.file.".claude/CLAUDE.md".source =
       config.lib.file.mkOutOfStoreSymlink "${currentFolder}/CLAUDE.md";
 
+    # Claude Code loads every rule file in ~/.claude/rules into each session.
+    home.file.".claude/rules".source =
+      config.lib.file.mkOutOfStoreSymlink "${currentFolder}/rules";
+
     home.file.".claude/skills".source =
       config.lib.file.mkOutOfStoreSymlink skillsFolder;
 

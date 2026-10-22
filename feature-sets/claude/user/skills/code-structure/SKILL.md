@@ -202,3 +202,17 @@ Before you add or move a unit, answer three questions:
 
 Place and name the unit from those answers. Give the answers with the
 placement.
+
+### Agree on the tree
+
+- If the work adds more than one unit, or any unit at a root, propose the
+  tree first. Give each unit its three answers and the package-or-folder
+  proposal. Wait for my approval before you write code.
+- After I approve the tree, write it to disk as stub files before you
+  implement anything. The tree then stays between sessions.
+  - Give each stub a TODO comment with its three answers.
+  - Make sure that the stubs build.
+- If you implement a unit, replace its TODO with the doc comment.
+- If the code later shows a new ownership fact, propose the tree change
+  first. Do not move code until I approve. Update the stubs on disk in the
+  same way.
