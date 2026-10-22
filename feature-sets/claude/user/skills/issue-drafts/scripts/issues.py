@@ -47,6 +47,10 @@ class Draft:
         return self.meta.get("labels", [])
 
     @property
+    def assignees(self):
+        return self.meta.get("assignees", [])
+
+    @property
     def status(self):
         return self.meta.get("status", "")
 
@@ -65,7 +69,7 @@ def parse(text):
     for line in match.group(1).splitlines():
         key, _, value = line.partition(":")
         value = value.strip()
-        if key.strip() == "labels":
+        if key.strip() in ("labels", "assignees"):
             value = [label.strip() for label in value.strip("[]").split(",") if label.strip()]
         elif len(value) >= 2 and value[0] == value[-1] == '"':
             value = value[1:-1]
@@ -244,7 +248,8 @@ def print_tree(drafts, depth=0):
     for draft in drafts:
         state = f"#{draft.issue}" if draft.issue else "new"
         status = f"  {draft.status}" if draft.status else ""
-        print(f"{'  ' * depth}{draft.number}  {draft.title}  [{', '.join(draft.labels)}]{status}  {state}")
+        assignees = f"  {' '.join(draft.assignees)}" if draft.assignees else ""
+        print(f"{'  ' * depth}{draft.number}  {draft.title}  [{', '.join(draft.labels)}]{status}{assignees}  {state}")
         print_tree(draft.children, depth + 1)
 
 
@@ -258,6 +263,8 @@ def create(drafts, repo, parent, board):
             args = ["issue", "create", "--repo", repo, "--title", draft.title, "--body-file", body.name]
             for label in draft.labels:
                 args += ["--label", label]
+            for assignee in draft.assignees:
+                args += ["--assignee", assignee]
             url = gh(*args)
             os.unlink(body.name)
             number = int(url.rstrip("/").rsplit("/", 1)[-1])

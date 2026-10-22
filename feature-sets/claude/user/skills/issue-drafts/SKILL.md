@@ -72,6 +72,7 @@ title: "<title in the format of the repository>"
 labels: [<label>, <label>]
 parent: "#123"
 status: Todo
+assignees: [@me]
 issue:
 ---
 
@@ -95,9 +96,19 @@ One or two sentences.
   or `Refine`. If the choice is not clear, ask. The board has no default, so
   an issue without a Status gets lost. If the parent is on no board,
   `status` stays empty.
+- `assignees` is optional. It takes GitHub logins, and `@me` is the user
+  of `gh`. If the user asks to take the issues, set `[@me]`.
 - `issue` stays empty until the issue exists.
 - Write the scope as requirements. A checked item says what the issue needs,
   not what somebody did.
+- Use a checkbox only for a task. Write facts, findings, and context as
+  plain bullets, without `[ ]` or `[x]`.
+- If an item has a choice between options, put each option in a sub-bullet
+  without a checkbox. Label the options `a.`, `b.`, `c.`.
+- If an item holds several facts, write a short lead line and put each fact
+  in a sub-bullet. Indent sub-bullets by 4 spaces.
+- Mark a sub-bullet that gives a reason or a consequence with `- → `.
+  Facts and options keep a plain bullet.
 - Write a definition of done for every issue. Each item is a condition that a
   reviewer can check, for example a behavior, a test that passes, or a
   document that exists. Do not repeat the scope items. If the work needs
