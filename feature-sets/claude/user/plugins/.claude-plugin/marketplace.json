@@ -7,7 +7,7 @@
     {
       "name": "text-rules",
       "source": "./text-rules",
-      "description": "Checks the text Claude writes against the writing rules in ~/.claude/CLAUDE.md."
+      "description": "Checks the text Claude writes against the writing rules in ~/.claude/rules/writing.md."
     }
   ]
 }

@@ -6,6 +6,7 @@
   ...
 }: let
   json = pkgs.formats.json {};
+  userFolder = "${vars.flakeRoot}/feature-sets/claude/user";
 in {
   options.myConfig.claude.managedSettings = lib.mkOption {
     type = json.type;
@@ -21,9 +22,17 @@ in {
     myConfig.claude.managedSettings = {
       extraKnownMarketplaces.local.source = {
         source = "directory";
-        path = "${vars.flakeRoot}/feature-sets/claude/user/plugins";
+        path = "${userFolder}/plugins";
       };
       enabledPlugins."text-rules@local" = true;
+      # The text-rules hook agent needs these, and they sit outside every project.
+      # A Read allow rule must match both the link path and its target. The leading / of
+      # an absolute path after Read(/ makes //, which anchors the path at the filesystem root.
+      permissions.allow = [
+        "Read(~/.claude/rules/**)"
+        "Read(/${userFolder}/**)"
+        "Bash(${userFolder}/plugins/text-rules/extract.sh *)"
+      ];
     };
 
     environment.etc."claude-code/managed-settings.json".source =

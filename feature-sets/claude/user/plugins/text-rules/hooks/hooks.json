@@ -1,5 +1,5 @@
 {
-  "description": "At the end of each turn, checks comments, docs, and the chat reply against the writing rules.",
+  "description": "At the end of each turn, checks the comments and docs written in that turn against the writing rules.",
   "hooks": {
     "Stop": [
       {
