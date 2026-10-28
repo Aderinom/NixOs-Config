@@ -10,6 +10,10 @@ Hard rules:
 - One idea per sentence. A cause and its effect count as one idea. Join them
   with "so" or "because".
 - Active voice only.
+- Make the real actor the subject. If the subject cannot do the verb, as in
+  "the directory authenticates" or "the config names a directory", rewrite
+  the sentence. Use the unit that does it, or state the relation: "the
+  config holds", "sets", or "has".
 - Present tense. Do not write "is doing" when "does" works.
 - One meaning per word. Do not swap in near-synonyms.
 - Put the condition first ("If X, then do Y").
@@ -24,6 +28,22 @@ Hard rules:
 - No em-dashes.
 
 These rules cover everything you write: chat, docs, and code comments.
+
+## Layout
+
+- Give each thought its own line. Leave a blank line where the topic
+  changes. Do not merge thoughts into long paragraphs.
+- Where the renderer joins lines, as in Markdown files and doc comments,
+  a paragraph holds at most two sentences. Put a condition, an exception,
+  or a default in a paragraph of its own. Example:
+
+      /**
+       * Sends `req` when a subscriber comes.
+       *
+       * If the subscriber leaves before the response, it aborts the fetch.
+       */
+- Never break a line in the middle of a sentence where the renderer keeps
+  line breaks, as in chat and on GitHub.
 
 ## AI tells
 
@@ -68,6 +88,10 @@ Cut or replace these on sight:
 - Do not argue for a decision in the docs.
 - Write a comment only where the reader cannot work it out from the code.
   The thought comments in `code-layout.md` are the exception.
+- If code relies on a behavior of another unit, state that behavior as a
+  guarantee in the doc of the unit that provides it. Do not name the
+  caller there. At the caller, point to the guarantee. If a test can
+  check the guarantee, add one.
 - Write each fact in one place only.
 - Repeat a fact only in an overview. The overview points at the one source.
 - Keep an overview at the level that carries the idea. Do not list single

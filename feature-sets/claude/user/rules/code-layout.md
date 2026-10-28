@@ -17,9 +17,14 @@
 - Do not put a `match` or an `if` inside a returned expression, for
   example `Ok(match ...)` or `return if ...`. Bind the result to a named
   variable first, then return the variable.
+- Do not pass the result of a call that does work, such as an `await` or
+  an RPC, straight into another call. Bind it to a named variable first.
 - If a helper function has one caller, nest it inside that caller. Put it
   at the bottom of the caller. In Rust, end the body with `return ...;` so
   that the item can follow.
 - If several helpers serve one function, group them with that function
   as associated functions of a unit struct. Use the struct as a namespace.
   Do not add a `mod` for this.
+- Name a function by what it does, not by what it returns: `buildQueries`,
+  not `builtQueries`. A getter that only returns held state is the
+  exception, for example `currentToken()`.

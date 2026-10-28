@@ -36,7 +36,8 @@ These rules apply to every Claude Code session for this user. A per-project
   `~/.claude/CLAUDE.md`, `~/.claude/rules`, and `~/.claude/skills` only
   link to them. Follow the link and edit the target.
 - Every file in `~/.claude/rules` loads into each session: `writing.md`
-  for all text, `code-layout.md` for function bodies.
+  for all text, `code-layout.md` for function bodies, `workflow.md` for
+  work in steps.
 
 ## 02 Code
 

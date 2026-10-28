@@ -18,6 +18,8 @@ each new comment by `~/.claude/rules/writing.md`.
 - Change layout only: blank lines, thought comments, bindings before a
   return, and helper placement.
 - Do not change behavior, names, or public signatures.
+- Do not remove an assertion from a test. If an assertion looks redundant,
+  report it instead.
 - Do not fight the formatter of the project. If rustfmt, Prettier, gofmt, or
   a linter decides a point, follow it.
 - If the project rules differ from these rules, follow the project rules.

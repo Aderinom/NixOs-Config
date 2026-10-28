@@ -28,6 +28,9 @@ Look for these problems first:
 - A fact said twice, in one text or across files.
 - Text that explains more than the reader needs to act.
 - Words from the "AI tells" list, em-dashes, hedging, passive voice.
+- A paragraph in a doc comment or Markdown with more than two sentences,
+  or a condition, exception, or default that shares a paragraph with the
+  main statement.
 
 A long sentence is a problem only if it is hard to read. Do not count words.
 

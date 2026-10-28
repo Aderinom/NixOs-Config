@@ -15,6 +15,10 @@ with it.
   branch, so a stacked PR shows only its own commits.
 - A branch or commit: diff it against its base.
 - A path: use the files as they are, not a diff.
+- "uncommitted": use the unstaged and untracked files from
+  `git status --untracked-files=all`. If some files are staged, ask the
+  user whether to include them, because staged files can hold work that
+  the user already checked.
 
 ## Base
 

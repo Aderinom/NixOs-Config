@@ -32,6 +32,9 @@ rules say something else, the project rules win.
 - The composition root builds the running components from the settings and
   holds them. It is the one place where the components come together. The
   boundaries reach the components only through its handle.
+- A component is a unit with a role of its own at run time that the
+  boundaries reach through the composition root. The core is the component
+  that holds the main domain logic.
 
 ## Rules
 
@@ -77,6 +80,11 @@ rules say something else, the project rules win.
      code never depends on the boundary's entry points. Entry points only
      forward calls. Whether inner code may use the contract types is a
      decision, see "Decisions".
+   - A boundary declares its contract types in full, even if they look like
+     the contract types of a component. Do not derive them from those
+     (`Omit`, `Pick`, `&`), because the boundary translates between its
+     callers and the component, and the two sides change for different
+     reasons.
    - A boundary depends on the handle of the composition root, the
      configuration, and the contracts of the components. It never depends
      on the parts of the components.
