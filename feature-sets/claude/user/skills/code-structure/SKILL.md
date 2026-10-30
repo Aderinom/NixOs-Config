@@ -50,6 +50,9 @@ rules say something else, the project rules win.
    members share, such as conversions. Name that shared code by its role,
    not `common`. The first level of an implementation is a root in itself,
    so rule 1 applies to it again.
+   A `utils` is allowed, inside a unit or at a root. It holds helpers that
+   are too small to be a unit of their own. A `utils` at a root imports
+   nothing else from the codebase, so it stays a leaf (rules 1 and 8).
 3. Place a unit by where it lives and works at run time. Who constructs it
    does not count. The composition root builds and holds every component, so
    neither its imports nor its ownership decides placement.
@@ -91,7 +94,9 @@ rules say something else, the project rules win.
    - A boundary creates the handle from its settings. It never creates the
      parts of the components.
 9. Use explicit import paths. No re-exports and no barrel files, so each
-   import shows where the item lives.
+   import shows where the item lives. The exception is the public API of a
+   published package: a facade at its root may re-export the items that
+   its users see.
 10. Attach behavior to the type it acts on: make it a method or an
     associated function, next to the type definition. If a unit needs
     behavior on a type that it does not own, give that unit its own type or
