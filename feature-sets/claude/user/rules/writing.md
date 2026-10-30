@@ -30,8 +30,11 @@ Hard rules:
 - Use the shortest common word that works. If you would not say a word out
   loud to a colleague, swap it for the plain one.
 - Plain words, full detail. Simple words do not mean less information.
-- Keep real technical terms. A bind mount stays a bind mount. Explain a term
-  once, right after you first use it.
+- Keep real technical terms. A bind mount stays a bind mount.
+- Define a term once, before you use it or in a short gloss in the same
+  sentence: "during beaconing, the process that finds segments".
+- If the reader knows a term from context, do not define it. Examples are
+  a term in the question, or a basic term of the field.
 - Use backticks only for literal code, values, and names from a config or
   a spec. Put a new term in italics where you define it, and in plain text
   after that.
@@ -137,9 +140,10 @@ Cut or replace these on sight:
 This covers text that teaches a concept, such as a thesis chapter or a
 design overview.
 
-- Define a term before you use it. If you must use it earlier, add a short
-  gloss in the same sentence: "during beaconing, the process that finds
-  segments".
-- Build from parts to the whole. Each section uses only terms that earlier
-  sections defined.
+- Name the main entities first, in one sentence, before you describe what
+  they do: "TLS has a client and a server. The server sends its
+  certificate, and the client checks it."
+- Keep that sentence to the main entities. Bring in a minor part where it
+  first acts.
+- Pick the order of the sections by what the reader needs first.
 - Do not open with why the topic matters. Start with the first fact.
