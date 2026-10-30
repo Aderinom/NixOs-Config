@@ -181,4 +181,24 @@
   "intellij.region": "europe",
   "intellij.dataSharing": "none",
   "intellij.serverPath": "/home/akelbsch/projects/scion-code-review/endhost/public/bindings/kmp-ktor-engine/.vscode/scripts/kotlin-lsp",
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "markup.quote.markdown",
+        "settings": { "foreground": "#9A9A9A", "fontStyle": "italic" }
+      },
+      {
+        "scope": "punctuation.definition.quote.begin.markdown",
+        "settings": { "foreground": "#6A6A6A" }
+      },
+      {
+        "scope": "markup.inline.raw.string.markdown",
+        "settings": { "foreground": "#D7BA7D" }
+      },
+      {
+        "scope": "meta.link.reference.def.markdown",
+        "settings": { "foreground": "#6A7A6A" }
+      }
+    ]
+  },
 }

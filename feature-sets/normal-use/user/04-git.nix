@@ -5,6 +5,11 @@
   programs.delta.enable = true;
   programs.delta.enableGitIntegration = true;
 
+  programs.git.ignores = [
+    "_local/"
+    "**/.claude/settings.local.json"
+  ];
+
   programs.git.settings = {
     user.email = vars.gitMail;
     user.name = vars.gitName;
