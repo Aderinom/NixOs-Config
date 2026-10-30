@@ -7,6 +7,20 @@ description: Write a pull request description. Use when the user asks for a PR d
 
 Write a rough overview. Do not write detailed changes.
 
+## Draft first
+
+Write the title and the body to `_local/<branch>/PR.md`.
+
+After the user approves the draft, open or edit the PR.
+
+## Check the PR after a push
+
+After you open a PR or push to it, start a background job that waits one
+minute and then runs `gh pr checks <n> --repo <owner/repo>`. Report each
+failed check to the user, with the error from its log.
+
+If a check is still pending, check it again when it ends.
+
 ## Format
 
 ```
@@ -16,6 +30,13 @@ Changes:
 
 - <change>
 - <change>
+
+Behavior changes:
+
+- <behavior change>
+
+BREAKING CHANGE: <what breaks, in one sentence>
+- <API and its new shape>
 ```
 
 Rules:
@@ -35,10 +56,46 @@ Rules:
   counts. Do not explain how the component works.
 - Leave out behavior, caching, defaults, limits, and reasons. The reviewer
   reads the diff for those.
-- No sections for testing, motivation, screenshots, or breaking changes,
-  unless the user asks for them.
+- No sections for testing, motivation, or screenshots, unless the user asks
+  for them.
+- Write crate names, paths, and code identifiers in backticks, for example
+  `scion-stack` or `ScionTxtDnsResolver::builder`.
 - Never add an attribution footer. Never write
   `🤖 Generated with [Claude Code](https://claude.com/claude-code)`.
+
+Rules for `Behavior changes:` and the `BREAKING CHANGE:` footer:
+
+- If a caller, a user, or an operator sees a different result, add
+  `Behavior changes:`. Name the component and the new behavior.
+- Before you decide that nothing breaks, check each changed dependency of a
+  public crate.
+- If a `pub use` re-exports the dependency, a public type implements one of
+  its traits, or a public signature uses its types, the change breaks the
+  public API.
+- If a dependency change crosses a major version, or a minor version of a
+  `0.x` crate, it counts.
+- If a dependency change turns a feature off, it counts too.
+- If the change breaks a public API, end the message with a
+  `BREAKING CHANGE:` footer, as Conventional Commits defines it. Nothing
+  follows the footer.
+- The footer starts with one sentence about what breaks. Then name each API
+  that breaks, and its new shape, one item per line.
+- If the message has the footer, mark the conventional title with `!` before
+  the colon, for example `fix(deps)!: <title>`.
+- If a section has no item, leave it out.
+- One point per item, 15 words at most. Write each item as a statement in
+  the present tense, about the state after the merge.
+
+Example:
+
+```
+Behavior changes:
+
+- Connect clients and servers no longer accept zstd compression
+
+BREAKING CHANGE: scion-stack moves to hickory 0.26.
+- ScionTxtDnsResolver::from_builder takes ResolverBuilder<TokioRuntimeProvider> from hickory 0.26
+```
 
 ## Examples
 

@@ -43,8 +43,9 @@ drafts in a code editor. Create the issues only after the user approves.
 
 ## 3. Write the drafts
 
-Put the drafts in a folder. If the user names none, ask, and offer
-`issues/` in the working directory.
+Put the drafts in `_local/issues/`, as the "Local files" rules of
+`~/.claude/rules/workflow.md` say. If the user names another folder, use
+that one.
 
 ```text
 issues/

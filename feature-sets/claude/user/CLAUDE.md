@@ -20,6 +20,8 @@ These rules apply to every Claude Code session for this user. A per-project
 - Do not talk about yourself as a person. No feeling, wanting, enjoying, or
   being excited.
 - I can handle hard topics. Do not water things down. Do not hold back detail.
+- If a stop hook flags a rule, fix the text and end the turn. Do not report
+  the fix.
 
 ### Purpose
 

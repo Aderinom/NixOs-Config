@@ -14,15 +14,27 @@ Hard rules:
   "the directory authenticates" or "the config names a directory", rewrite
   the sentence. Use the unit that does it, or state the relation: "the
   config holds", "sets", or "has".
+- Do not start a sentence with a bare "This" or "It" that points at a
+  whole earlier sentence. Name the thing: "The vote chain links each TRC
+  to its predecessor."
 - Present tense. Do not write "is doing" when "does" works.
 - One meaning per word. Do not swap in near-synonyms.
+- Write each term with one spelling and one capitalization: "core AS",
+  never "Core AS" in one place and "core AS" in another.
 - Put the condition first ("If X, then do Y").
+- Chain sentences by topic. If a sentence ends on a new term, start the
+  next sentence with that term.
+- Give parallel things the same sentence shape. Three certificate types
+  get three paragraphs with the same order of facts.
 - No hedging. Drop should, would, may, and might when you can state the fact.
 - Use the shortest common word that works. If you would not say a word out
   loud to a colleague, swap it for the plain one.
 - Plain words, full detail. Simple words do not mean less information.
 - Keep real technical terms. A bind mount stays a bind mount. Explain a term
   once, right after you first use it.
+- Use backticks only for literal code, values, and names from a config or
+  a spec. Put a new term in italics where you define it, and in plain text
+  after that.
 - Leave code, commands, paths, and error messages byte-exact. Do not style
   them.
 - No em-dashes.
@@ -67,6 +79,9 @@ Cut or replace these on sight:
 - Lead-ins that announce the next line: "This has some effects to know:",
   "Two variables need care:", "The next section explains them." Start with
   the content.
+- A sentence before a list states a fact about the whole list, for
+  example "The CP-PKI has three levels of certificates below the TRC."
+  It does not only announce the list.
 
 ## Comments and documentation
 
@@ -116,3 +131,15 @@ Cut or replace these on sight:
   repeat the `TODO:` comments.
 - If the project already has a place for open work, such as an issue
   tracker, use that and do not add a `TODO.md`.
+
+## Explanations
+
+This covers text that teaches a concept, such as a thesis chapter or a
+design overview.
+
+- Define a term before you use it. If you must use it earlier, add a short
+  gloss in the same sentence: "during beaconing, the process that finds
+  segments".
+- Build from parts to the whole. Each section uses only terms that earlier
+  sections defined.
+- Do not open with why the topic matters. Start with the first fact.
