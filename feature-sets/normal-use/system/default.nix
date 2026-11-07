@@ -2,28 +2,20 @@
   imports = [
     ./chromium
     ./00-packages.nix
-    ./01-bootloader.nix
-    ./03-locale.nix
+    ./01-kernel.nix
     ./04-network.nix
     ./05-systemd.nix
-    ./06-display.nix
     ./07-audio.nix
-    ./08-security.nix
-    ./09-nix-tools.nix
-    ./10-nix-compat.nix
-    ./11-fish.nix
     ./12-headsetcontrol.nix
-    ./13-fonts.nix
     ./14-virtualization.nix
-    ./15-bluetooth.nix
-    ./16-usb.nix
     ./17-printer.nix
     ./18-scanner.nix
     ./19-logitech.nix
-    ./20-tailscale.nix
     ./21-disk-tuning.nix
     ./22-ddcutil.nix
     ./98-programs.nix
-    ./99-services.nix
   ];
+
+  myConfig.features.base.enable = true;
+  myConfig.features.graphical-session.enable = true;
 }

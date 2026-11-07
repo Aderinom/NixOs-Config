@@ -1,32 +1,13 @@
 {...}: {
-  programs.direnv.enable = true;
+  programs.fish.shellAliases = {
+    rn = "hyprctrl dispatch exec";
 
-  # programs.direnv.enableFishIntegration = true;
+    mkubectl = "minikube kubectl -- ";
 
-  programs.fish = {
-    enable = true;
-    generateCompletions = true;
-    shellInit = "
-        set fish_greeting
-      ";
+    bazel = "bazelisk";
 
-    shellAliases = {
-      ssh = "TERM=xterm-256color /run/current-system/sw/bin/ssh";
-
-      cat = "bat -pp";
-      less = "bat";
-
-      rn = "hyprctrl dispatch exec";
-
-      find = "fd";
-
-      mkubectl = "minikube kubectl -- ";
-
-      bazel = "bazelisk";
-
-      check-ops-vpn = "sudo systemctl status openvpn-ops-vpn.service";
-      start-ops-vpn = "sudo systemctl start openvpn-ops-vpn.service";
-      stop-ops-vpn = "sudo systemctl stop openvpn-ops-vpn.service";
-    };
+    check-ops-vpn = "sudo systemctl status openvpn-ops-vpn.service";
+    start-ops-vpn = "sudo systemctl start openvpn-ops-vpn.service";
+    stop-ops-vpn = "sudo systemctl stop openvpn-ops-vpn.service";
   };
 }

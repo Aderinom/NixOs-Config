@@ -7,10 +7,15 @@
   username = "user"; # Your desired user name
 
   # Turn on the feature sets you want to use here. The path of each one is its folder in feature-sets/.
+  # normal-use, server, and desktop.tv turn on base and graphical-session as they need them.
   features = {
     desktop.hyprland = true;
     # desktop.kde6 = true;
+    # desktop.tv = true;
     normal-use = true;
+    # server = true;
+    # base = true;
+    # graphical-session = true;
     # claude = true;
     # ctf = true;
     # personal-use = true;
@@ -30,6 +35,8 @@
   home-mgr-state-version = "xx.xx"; # Home Manager Version of initial install see [2]
 
   uses-nvidia-gpu = false;
+
+  ssh-authorized-keys = []; # Public keys that may log in, if sshd or server is on
 }
 /**
 
