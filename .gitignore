@@ -1,5 +1,4 @@
 *.qcow2
 log
 result
-.flake-type
 local

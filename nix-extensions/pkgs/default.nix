@@ -3,5 +3,6 @@
 pkgs: {
   claude-box = pkgs.callPackage ./claude-box {};
   numi-cli = pkgs.callPackage ./numi-cli.nix {};
+  anapaya-edge-app = pkgs.callPackage ./anapaya-edge-app.nix {};
   scarlett2-firmware = pkgs.callPackage ./scarlett2-firmware.nix {};
 }

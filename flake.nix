@@ -31,7 +31,6 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    vars = import ./flake-variables.nix {};
     # Define supported systems
     systems = [
       "aarch64-linux"
@@ -53,33 +52,23 @@
       modules = import ./nix-extensions/modules; # Nix Os Modules to import
     };
 
-    vars = vars;
-
-    nixosConfigurations = {
-      laptop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs vars;};
-        modules = [
-          ./flake-nix-config.nix
-          ./hosts/laptop
-        ];
-      };
-
-      desktop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs vars;};
-        modules = [
-          ./flake-nix-config.nix
-          ./hosts/desktop
-        ];
-      };
-
-      vm = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs vars;};
-        modules = [
-          inputs.nix-index-database.nixosModules.nix-index
-          ./flake-nix-config.nix
-          ./hosts/vm
-        ];
-      };
-    };
+    # One nixosConfigurations.<name> per folder in hosts/. The folder name is the hostname,
+    # so nh and nixos-rebuild pick the config of the machine they run on.
+    nixosConfigurations = let
+      sharedVars = import ./flake-variables.nix {};
+      mkHost = name:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+            vars = sharedVars // import ./hosts/${name}/vars.nix // {host = name;};
+          };
+          modules = [
+            ./flake-nix-config.nix
+            ./hosts/${name}
+          ];
+        };
+      hosts = builtins.attrNames (nixpkgs.lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./hosts));
+    in
+      nixpkgs.lib.genAttrs hosts mkHost;
   };
 }

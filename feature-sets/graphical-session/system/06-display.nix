@@ -10,13 +10,7 @@
   services.hardware.bolt.enable = true;
 
   services.xserver.enable = true;
-  services.xserver.videoDrivers =
-    (
-      if vars.uses-nvidia-gpu
-      then ["nvidia"]
-      else []
-    )
-    ++ ["modesetting"];
+  services.xserver.videoDrivers = ["modesetting"];
 
   services.xserver.xkb.layout = vars.kbdLayout;
 

@@ -11,8 +11,6 @@
   imports = [
     inputs.nix-index-database.nixosModules.nix-index
     outputs.my.modules.nixos # Load our custom modues
-    ./hardware-configuration.nix
-    ./flake-local.nix
     ./flake-system.nix
     ./flake-home-manager.nix
   ];
@@ -21,7 +19,7 @@
     overlays = [
       inputs.nix-alien.overlays.default
       inputs.nur.overlays.default
-      inputs.spt-linux-guide.overlays.default
+      outputs.my.overlays.spt-packages # Adds the SPT packages to nixpkgs
       outputs.my.overlays.additions # Adds our custom packages to nixpkgs
       outputs.my.overlays.modifications # Applies our overlays
       outputs.my.overlays.unstable-packages # Allows to  use unstable packages through pkgs.unstable
