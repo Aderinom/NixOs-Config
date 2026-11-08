@@ -3,6 +3,7 @@
     # Simple Cli Commands
     wl-clipboard # clipboard utils for wayland (wl-copy, wl-paste)
     xdg-utils
+    gh # GitHub CLI
 
     # Niche Cli Commands
     playerctl # controller for media players
