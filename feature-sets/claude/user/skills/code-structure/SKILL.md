@@ -15,6 +15,9 @@ package later, with changes to import paths only.
 These rules apply to code in any language and at any scale. If the project
 rules say something else, the project rules win.
 
+This skill decides which unit holds an item. The order of the items inside
+a file follows `~/.claude/rules/code-layout.md`.
+
 ## Vocabulary
 
 - A unit is any module, file, or folder.
