@@ -260,6 +260,17 @@ key, including `state` and `updated`.
 
 Closed issues stay out of the export.
 
+To change one issue, export only that issue:
+
+```bash
+python3 <skill folder>/scripts/issues.py export <n> <out folder> --repo <owner/repo> --single
+```
+
+`export --single` writes issue `<n>` and its open sub-issues. It puts them
+into `<out folder>/<parent>-<slug>.sub/`, so the parent stays the same.
+
+If `<n>` has no parent, the folder name has no number.
+
 To reorganize, edit the exported tree:
 
 - Move a draft into another `.sub` folder, and fix its `parent`, to move the

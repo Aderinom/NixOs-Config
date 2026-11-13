@@ -10,12 +10,15 @@ If the name of the top folder starts with an issue number, as in
     issues.py check  <folder> --repo <owner/repo> [--project <owner>/<number>]
     issues.py plan   <folder> --repo <owner/repo> [--project <owner>/<number>]
     issues.py apply  <folder> --repo <owner/repo> [--project <owner>/<number>]
-    issues.py export <issue> <out folder> --repo <owner/repo> [--project <owner>/<number>]
+    issues.py export <issue> <out folder> --repo <owner/repo> [--project <owner>/<number>] [--single]
 
 `check` and `plan` write nothing. `apply` makes the changes that `plan`
 lists.
 
 `export` writes the open sub-issues of an issue as drafts.
+
+`export --single` writes the issue itself and its open sub-issues, into the
+`.sub` folder of its parent.
 
 The board is the project of the parent issue, or the one that `--project`
 names.
@@ -826,8 +829,38 @@ def short(key, repo):
     return name
 
 
-def export(repo, number, out, board):
-    """Writes the open sub-issues of `number` as drafts below `out`, and returns the top folder."""
+def export(repo, number, out, board, single=False):
+    """Writes drafts below `out`, and returns the top folder.
+
+    By default, the drafts are the open sub-issues of `number`.
+
+    If the caller sets `single`, the drafts are `number` itself and its open sub-issues. The top folder is
+    then the `.sub` folder of the parent of `number`, or a folder without a number if it has no
+    parent.
+    """
+
+    def write_draft(remote, folder, index, parent_ref):
+        """Writes `remote` as draft `index` of `folder`, and its open sub-issues below it."""
+        # Write the draft. Every list item is a JSON string, so a comma in a label survives.
+        name = f"{index:02d}-{slug(remote.title)}"
+        meta = [
+            "---",
+            f"title: {json.dumps(remote.title, ensure_ascii=False)}",
+            f"labels: [{', '.join(json.dumps(label, ensure_ascii=False) for label in remote.labels)}]",
+            f'parent: "{parent_ref}"',
+            f"status: {remote.status}",
+            f"priority: {remote.priority}",
+            f"assignees: [{', '.join(json.dumps(login) for login in remote.assignees)}]",
+            f"blocked_by: [{', '.join(json.dumps(short(key, repo)) for key in remote.blocked_by)}]",
+            "state: open",
+            f"updated: {remote.updated}",
+            f"issue: https://github.com/{repo}/issues/{remote.number}",
+            "---",
+        ]
+        with open(os.path.join(folder, name + ".md"), "w", encoding="utf-8") as out_file:
+            out_file.write("\n".join(meta) + "\n\n" + remote.body + "\n")
+
+        write_level(remote, os.path.join(folder, name + ".sub"), f"../{name}.md")
 
     def write_level(parent, folder, parent_ref):
         """Writes the open sub-issues of `parent` into `folder`, and their sub-issues below it."""
@@ -835,38 +868,35 @@ def export(repo, number, out, board):
             return
         os.makedirs(folder)
         for index, child in enumerate(parent.children, start=1):
-            # Write the draft. Every list item is a JSON string, so a comma in a label survives.
             remote = Remote.fetch(repo, child, board)
-            name = f"{index:02d}-{slug(remote.title)}"
-            meta = [
-                "---",
-                f"title: {json.dumps(remote.title, ensure_ascii=False)}",
-                f"labels: [{', '.join(json.dumps(label, ensure_ascii=False) for label in remote.labels)}]",
-                f'parent: "{parent_ref}"',
-                f"status: {remote.status}",
-                f"priority: {remote.priority}",
-                f"assignees: [{', '.join(json.dumps(login) for login in remote.assignees)}]",
-                f"blocked_by: [{', '.join(json.dumps(short(key, repo)) for key in remote.blocked_by)}]",
-                "state: open",
-                f"updated: {remote.updated}",
-                f"issue: https://github.com/{repo}/issues/{child}",
-                "---",
-            ]
-            with open(os.path.join(folder, name + ".md"), "w", encoding="utf-8") as out_file:
-                out_file.write("\n".join(meta) + "\n\n" + remote.body + "\n")
+            write_draft(remote, folder, index, parent_ref)
 
-            # Write its sub-issues.
-            write_level(remote, os.path.join(folder, name + ".sub"), f"../{name}.md")
+    # Find the top folder and the parent of the first level.
+    top = Remote.fetch(repo, number, board)
+    if single and top.parent:
+        parent = Remote.fetch(repo, top.parent, board)
+        folder = os.path.join(out, f"{parent.number}-{slug(parent.title)}.sub")
+        parent_ref = f"#{parent.number}"
+    elif single:
+        folder = os.path.join(out, slug(top.title))
+        parent_ref = ""
+    else:
+        folder = os.path.join(out, f"{number}-{slug(top.title)}.sub")
+        parent_ref = f"#{number}"
 
     # Refuse to overwrite an earlier export.
-    top = Remote.fetch(repo, number, board)
-    folder = os.path.join(out, f"{number}-{slug(top.title)}.sub")
     if os.path.exists(folder):
         sys.exit(f"{folder} exists already. Move it away first.")
-    if not top.children:
+    if not single and not top.children:
         sys.exit(f"#{number} has no open sub-issues")
 
-    write_level(top, folder, f"#{number}")
+    # Write the drafts.
+    if single:
+        os.makedirs(folder)
+        write_draft(top, folder, 1, parent_ref)
+    else:
+        write_level(top, folder, parent_ref)
+
     return folder
 
 
@@ -888,13 +918,23 @@ def main():
     parser.add_argument("out", nargs="?", help="for `export`: the folder to write the drafts into")
     parser.add_argument("--repo", required=True, help="owner/repo")
     parser.add_argument("--project", help="the board as <owner>/<number>, if the parent issue is on none or on several")
+    parser.add_argument("--single", action="store_true", help="for `export`: write the issue itself and its sub-issues, not only its sub-issues")
     args = parser.parse_args()
 
     # Export writes drafts and needs no tree.
     if args.command == "export":
         number = int(args.target.lstrip("#"))
-        board = Board.named(args.project) if args.project else Board.of_issue(args.repo, number)
-        folder = export(args.repo, number, args.out or ".", board)
+
+        # Take the board that `check` takes later: the board of the parent of the first level.
+        if args.project:
+            board = Board.named(args.project)
+        elif args.single:
+            parent = Remote.fetch(args.repo, number, None).parent
+            board = Board.of_issue(args.repo, parent) if parent else None
+        else:
+            board = Board.of_issue(args.repo, number)
+
+        folder = export(args.repo, number, args.out or ".", board, args.single)
         print(folder)
         return
 

@@ -40,35 +40,17 @@ Draw one draw.io diagram at `_local/<branch>/entities.drawio`:
 - If an entity holds or sees something that matters for a threat, add it
   to the label of its box, for example `sees: client IP, SNI`.
 - Add a legend box for the four conventions above.
-- Pin each arrow to a side of its boxes with `exitX`/`exitY` and
-  `entryX`/`entryY`. Route the trust arrows around the containers with
-  waypoints. Without these, the automatic routing cuts through other boxes.
+- Follow the layout rules of the `diagrams` skill. Route the trust arrows
+  around the containers with waypoints.
 
 If the diagram has more than about ten boxes, split it into one diagram for
 the traffic and one for the trust.
 
 ### Export and check
 
-draw.io needs a display. Xvfb gives it one.
-
-If `ELECTRON_RUN_AS_NODE` is set, draw.io fails. The VS Code server sets
-this variable, so unset it for each call.
-
-```bash
-Xvfb :99 -screen 0 1600x1200x24 >/dev/null 2>&1 & XPID=$!
-export DISPLAY=:99
-env -u ELECTRON_RUN_AS_NODE drawio --no-sandbox --disable-gpu \
-  -x -f svg -e -o entities.drawio.svg entities.drawio
-env -u ELECTRON_RUN_AS_NODE drawio --no-sandbox --disable-gpu \
-  -x -f png -s 2 -o <scratchpad>/entities.png entities.drawio
-kill $XPID
-```
-
-- The `-e` flag embeds the diagram in the SVG. The SVG then goes into a
-  Google Doc and still opens in draw.io.
-- Read the PNG and look for arrows that cross boxes and for labels that
-  overlap. Fix them and export again.
-- Tell the user to fix the fine layout in the draw.io app.
+Export and check the diagram as the `diagrams` skill describes. Save it as
+`_local/<branch>/entities.drawio.svg`, so that it goes into a Google Doc
+and still opens in draw.io.
 
 ## 3. Write the trust relations
 
