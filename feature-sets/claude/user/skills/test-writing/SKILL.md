@@ -54,6 +54,13 @@ Show me the list. Wait for my approval before you write a test.
   `describe` in TypeScript, a nested `mod` inside `mod tests` in Rust.
 - The test name is the case sentence: `it('should ...')` in TypeScript,
   `fn should_...()` in Rust.
+- Keep repetitive tests short.
+- If cases differ only in input and expected result, write one test over
+  a table of (input, expected) rows.
+- Give each row of a table a short label, and put it in the assert
+  message. Keep each row on one line.
+- Move the setup that each test repeats into short helpers with plain
+  arguments, for example seconds in place of `SystemTime`.
 - A test that checks a mechanism may reach into the internals of the unit.
 - Test each behavior at the lowest level that shows it. A test of a unit
   that builds other units checks only how it wires them.

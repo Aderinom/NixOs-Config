@@ -32,6 +32,10 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+# The log format of the code threads lives in the `code-threads` skill.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "code-threads" / "scripts"))
+from threads import Review  # noqa: E402
+
 RULE = "-" * 67
 LINT = "<!-- markdownlint-disable MD013 MD035 -->"
 LINKS = "<!-- Links -->"
@@ -281,6 +285,75 @@ class ReviewFile:
         return "\n".join(lines) + "\n"
 
 
+class FeedbackThreads:
+    """Mirrors the threads into the review `<branch>-feedback` of the `code-threads` skill.
+
+    Each thread with a file and a line gets the thread `t_r<number>`. A second run adds only the
+    comments that came since. It counts the comments that it wrote before by their author: every
+    author except `agent` and `reviewer`, the two authors of the VS Code side.
+    """
+
+    # From the most to the least urgent disposition of a reviewer.
+    DISPOSITIONS = ["blocking", "working", "discussing", "pondering", "following", "satisfied", "informing"]
+
+    # The authors that the VS Code side writes: our drafts and the comments of the user.
+    LOCAL_AUTHORS = ("agent", "reviewer")
+
+    @staticmethod
+    def sync(threads, repo_root):
+        """Adds the new threads and comments, and returns the name of the review."""
+        review = Review(repo_root, git("branch", "--show-current") + "-feedback")
+        review.activate()
+        existing = {t["id"]: t for t in review.threads()}
+
+        for thread in threads:
+            # A thread on the whole PR has no line to sit on. It stays in REVIEW.md only.
+            location = thread.location or {}
+            path = repo_root / location.get("file", {}).get("path", "")
+            line = location.get("line")
+            if not line or not path.is_file():
+                continue
+
+            # The comments of the thread that the log does not hold yet.
+            thread_id = f"t_r{thread.number}"
+            known = existing.get(thread_id)
+            synced = 0
+            if known:
+                synced = sum(c["author"] not in FeedbackThreads.LOCAL_AUTHORS for c in known["comments"])
+            new = thread.comments[synced:]
+            if not new:
+                continue
+
+            # A new thread starts with its first comment, under its key, disposition, and topic.
+            if not known:
+                first = new.pop(0)
+                title = f"**R{thread.number} · {FeedbackThreads.disposition(thread)} · {thread.topic}**"
+                body = f"{title}\n\n{unwrap(first['markdownBody']).strip()}"
+                review.add(path, line, line, body, first["author"]["username"], thread_id)
+
+            for comment in new:
+                event = {
+                    "op": "reply",
+                    "thread": thread_id,
+                    "author": comment["author"]["username"],
+                    "body": unwrap(comment["markdownBody"]).strip(),
+                }
+                review.append(event)
+
+        return review.name
+
+    @staticmethod
+    def disposition(thread):
+        """Returns the most urgent disposition among the people who are not us."""
+        own = {c["author"]["username"] for c in thread.comments if thread.is_own(c)}
+        order = FeedbackThreads.DISPOSITIONS
+        others = [d for user, d in thread.dispositions.items() if user not in own and d in order]
+        if not others:
+            return "discussing"
+
+        return min(others, key=order.index)
+
+
 def pull(args):
     cli = Cli(args.pr)
     path = Path(args.file) if args.file else ReviewFile.default_path()
@@ -319,6 +392,10 @@ def pull(args):
     path.write_text(ReviewFile.render(threads, args.pr, path.parent, repo_root))
     open_count = sum(t.reply == OPEN for t in threads)
     print(f"{path}: {len(threads)} threads, {open_count} open")
+
+    # The same threads on the code, for VS Code.
+    review = FeedbackThreads.sync(threads, repo_root)
+    print(f"threads: review {review}")
 
 
 def post(args):

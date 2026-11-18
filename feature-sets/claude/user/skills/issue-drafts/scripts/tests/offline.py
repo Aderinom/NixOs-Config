@@ -227,6 +227,52 @@ class BoardRace(unittest.TestCase):
                 board.item(REPO, 7)
 
 
+class Updated(unittest.TestCase):
+    """`updated` covers the issue and its item on the board."""
+
+    def fetch(self, issue_time, item_time):
+        board = issues.Board(PROJECT)
+        empty = {"totalCount": 0, "nodes": []}
+        issue = {
+            "number": 7, "title": "x: seven", "body": "", "state": "OPEN", "updatedAt": issue_time,
+            "labels": empty, "assignees": empty, "parent": None, "blockedBy": empty, "subIssues": empty,
+            "projectItems": {"totalCount": 1, "nodes": [{"updatedAt": item_time, "project": {"id": "BOARD"}, "status": None, "priority": None}]},
+        }
+        with mock.patch.object(issues, "graphql", return_value={"repository": {"issue": issue}}):
+            remote = issues.Remote.fetch(REPO, 7, board)
+        return remote.updated
+
+    def test_board_change_after_issue_change(self):
+        self.assertEqual(self.fetch("2026-11-12T09:08:03Z", "2026-11-12T09:08:36Z"), "2026-11-12T09:08:36Z")
+
+    def test_issue_change_after_board_change(self):
+        self.assertEqual(self.fetch("2026-11-12T09:09:00Z", "2026-11-12T09:08:36Z"), "2026-11-12T09:09:00Z")
+
+
+class ExportSingle(Folder):
+    """`export --single` into the folder of a parent that exists already."""
+
+    def export(self, number):
+        remotes = {12: remote(12, title="x: top"), 30: remote(30, parent=12), 31: remote(31, parent=12)}
+        with mock.patch.object(issues.Remote, "fetch", side_effect=lambda repo, number, board: remotes[number]):
+            folder = issues.export(REPO, number, self.folder, None, single=True)
+        return folder
+
+    def test_new_folder_starts_at_01(self):
+        folder = self.export(30)
+        self.assertEqual(os.listdir(folder), ["01-issue-30.md"])
+
+    def test_existing_folder_appends_after_the_last_draft(self):
+        self.write("12-top.sub/03-a.md", 'title: "x: issue 30"\nissue: https://github.com/o/r/issues/30', "Body.")
+        folder = self.export(31)
+        self.assertEqual(sorted(os.listdir(folder)), ["03-a.md", "04-issue-31.md"])
+
+    def test_existing_draft_of_the_issue_stops(self):
+        self.write("12-top.sub/01-a.md", 'title: "x: issue 30"\nissue: https://github.com/o/r/issues/30', "Body.")
+        with self.assertRaises(SystemExit):
+            self.export(30)
+
+
 class Helpers(unittest.TestCase):
 
     def test_slug(self):

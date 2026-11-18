@@ -24,7 +24,14 @@ If a check is still pending, check it again when it ends.
 ## Format
 
 ```
-<type>: <title>
+<title>
+
+closes: #<n>
+stacked on: #<n>
+
+<The problem or the missing feature, in one sentence.>
+
+<What the code does now, in one sentence.>
 
 Changes:
 
@@ -41,8 +48,20 @@ BREAKING CHANGE: <what breaks, in one sentence>
 
 Rules:
 
-- Title: conventional commit style, lowercase, one line. Drop the title if
-  the user only wants the body.
+- Title: one line.
+- If the project sets a title format, use it. Else use a lowercase
+  conventional commit title.
+- If the user only wants the body, drop the title.
+- Put the issue tags at the top of the body.
+- If the project names its tags, use them. Else write `closes: #<n>`, or
+  `Fixes #<n>` for a bug fix.
+- If the PR sits on another PR, add `stacked on: #<n>` below the issue
+  tags.
+- Lead: at most two sentences before `Changes:`.
+- The lead says why. The items say only what changed.
+- If the lead has a problem and a solution, put each in its own paragraph.
+  If a ticket exists and the PR does what it says, one sentence is enough.
+- If the PR differs from the ticket, the lead says how.
 - `Changes:`: always present, followed by a blank line.
 - One change per list item. Use a `- ` markdown list. No sub-lists. No blank
   lines between items.
@@ -53,7 +72,10 @@ Rules:
 - Start each item with a past tense verb: Replaced, Added, Migrated,
   Implemented, Removed, Fixed.
 - Name the component or type. Do not name single files, functions, or line
-  counts. Do not explain how the component works.
+  counts.
+- Do not explain how the component works.
+- If the PR touches several crates, prefix an item with its crate in
+  parentheses, for example `(sciparse): ...`.
 - Leave out behavior, caching, defaults, limits, and reasons. The reviewer
   reads the diff for those.
 - No sections for testing, motivation, or screenshots, unless the user asks

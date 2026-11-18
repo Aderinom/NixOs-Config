@@ -18,7 +18,8 @@ lists.
 `export` writes the open sub-issues of an issue as drafts.
 
 `export --single` writes the issue itself and its open sub-issues, into the
-`.sub` folder of its parent.
+`.sub` folder of its parent. If that folder exists, the draft goes after its
+last draft.
 
 The board is the project of the parent issue, or the one that `--project`
 names.
@@ -335,13 +336,16 @@ class Remote:
         blockedBy(first: {LIMIT}) {{ totalCount nodes {{ number repository {{ nameWithOwner }} }} }}
         subIssues(first: {LIMIT}) {{ totalCount nodes {{ number state }} }}
         projectItems(first: {LIMIT}) {{ totalCount nodes {{
-          project {{ id }}
+          updatedAt project {{ id }}
           status: fieldValueByName(name: "Status") {{ ... on ProjectV2ItemFieldSingleSelectValue {{ name }} }}
           priority: fieldValueByName(name: "Priority") {{ ... on ProjectV2ItemFieldSingleSelectValue {{ name }} }} }} }} }} }} }}"""
 
     @classmethod
     def fetch(cls, repo, number, board):
-        """The state of issue `number`. The board fields come from `board`, if it is set."""
+        """The state of issue `number`. The board fields come from `board`, if it is set.
+
+        `updated` is the later of the `updatedAt` of the issue and of its item on `board`.
+        """
         owner, name = repo.split("/")
         issue = graphql(cls.QUERY, owner=owner, name=name, number=number)["repository"]["issue"]
         if issue is None:
@@ -355,12 +359,17 @@ class Remote:
         # Take the fields of this board.
         items = [node for node in issue["projectItems"]["nodes"] if board and node["project"]["id"] == board.id]
         item = items[0] if items else {}
+
+        # A change to a board field moves only the `updatedAt` of the item, not the one of the issue.
+        # Both are ISO 8601 times in UTC, so the string order is the time order.
+        updated = max(issue["updatedAt"], item.get("updatedAt") or "")
+
         remote = cls(
             number=issue["number"],
             title=issue["title"],
             body=normalize(issue["body"] or ""),
             state=issue["state"].lower(),
-            updated=issue["updatedAt"],
+            updated=updated,
             labels=[node["name"] for node in issue["labels"]["nodes"]],
             assignees=[node["login"] for node in issue["assignees"]["nodes"]],
             parent=(issue["parent"] or {}).get("number"),
@@ -642,22 +651,29 @@ class Sync:
         if conflicts:
             sys.exit("conflicts, export again and redo the changes:\n" + "\n".join(conflicts))
 
-        # Create the new issues first, so that every draft has an issue for the other changes.
-        for change in changes:
-            if change.step == CREATE:
+        # GitHub moves the `updatedAt` of a board item some seconds after a change.
+        # A board workflow reacts within a few seconds, so wait for both before the times go into the drafts.
+        # A run that stops records the times too, so the next run resumes without a false conflict.
+        touched = set()
+        try:
+            # Create the new issues first, so that every draft has an issue for the other changes.
+            for change in changes:
+                if change.step == CREATE:
+                    print(change.text)
+                    change.run()
+                    touched.add(change.draft.issue)
+
+            # Compare again, now with the numbers of the new issues. Record each change for the conflict check of the next run.
+            changes, _ = self.plan()
+            for change in changes:
                 print(change.text)
+                touched.update(change.touches)
                 change.run()
-
-        # Compare again, now with the numbers of the new issues. Record each change for the conflict check of the next run.
-        changes, _ = self.plan()
-        for change in changes:
-            print(change.text)
-            change.run()
-            self.refresh(change.touches)
-
-        # If a change can start a board workflow, wait for it. Workflows react within a few seconds.
-        if any(change.step in (FIELDS, REOPEN, CLOSE) for change in changes):
-            time.sleep(WORKFLOW_DELAY)
+                self.refresh(change.touches)
+        finally:
+            if touched and self.board:
+                time.sleep(WORKFLOW_DELAY)
+                self.refresh(touched)
 
         # Compare once more. A change by a board workflow, or by a person, shows up as a difference or a conflict.
         left, conflicts = self.plan()
@@ -811,15 +827,13 @@ class Sync:
         return self.me
 
     def refresh(self, numbers):
-        """Writes the current `updatedAt` of each issue into its draft. An issue without draft needs nothing."""
+        """Writes the current `updated` time of each issue into its draft. An issue without draft needs nothing."""
         drafts = {draft.issue: draft for draft in self.tree.walk() if draft.issue}
-        owner, name = self.repo.split("/")
-        query = "query($owner: String!, $name: String!, $number: Int!) { repository(owner: $owner, name: $name) { issue(number: $number) { updatedAt } } }"
         for number in numbers:
             if number not in drafts:
                 continue
-            updated = graphql(query, owner=owner, name=name, number=number)["repository"]["issue"]["updatedAt"]
-            drafts[number].set_meta("updated", updated)
+            remote = Remote.fetch(self.repo, number, self.board)
+            drafts[number].set_meta("updated", remote.updated)
 
 
 def short(key, repo):
@@ -837,7 +851,22 @@ def export(repo, number, out, board, single=False):
     If the caller sets `single`, the drafts are `number` itself and its open sub-issues. The top folder is
     then the `.sub` folder of the parent of `number`, or a folder without a number if it has no
     parent.
+
+    If the top folder of `single` exists, the draft goes after the last draft of the folder.
     """
+
+    def next_index(folder):
+        """The index after the last draft of `folder`. Exits if a draft of the folder holds `number`."""
+        last = 0
+        for name in sorted(os.listdir(folder)):
+            match = FILE.match(name)
+            if not match:
+                continue
+            draft = Draft(os.path.join(folder, name), match.group("prefix"), None)
+            if draft.issue == number:
+                sys.exit(f"{draft.path} holds #{number} already. Delete it and its .sub folder to export it again.")
+            last = max(last, int(match.group("prefix")))
+        return last + 1
 
     def write_draft(remote, folder, index, parent_ref):
         """Writes `remote` as draft `index` of `folder`, and its open sub-issues below it."""
@@ -884,16 +913,16 @@ def export(repo, number, out, board, single=False):
         folder = os.path.join(out, f"{number}-{slug(top.title)}.sub")
         parent_ref = f"#{number}"
 
-    # Refuse to overwrite an earlier export.
-    if os.path.exists(folder):
+    # Refuse to overwrite an earlier export. A single draft joins an existing folder.
+    if not single and os.path.exists(folder):
         sys.exit(f"{folder} exists already. Move it away first.")
     if not single and not top.children:
         sys.exit(f"#{number} has no open sub-issues")
 
     # Write the drafts.
     if single:
-        os.makedirs(folder)
-        write_draft(top, folder, 1, parent_ref)
+        os.makedirs(folder, exist_ok=True)
+        write_draft(top, folder, next_index(folder), parent_ref)
     else:
         write_level(top, folder, parent_ref)
 

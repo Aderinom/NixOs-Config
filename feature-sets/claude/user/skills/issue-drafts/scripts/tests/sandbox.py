@@ -276,6 +276,12 @@ def main():
         else:
             print("SKIP  apply reports a difference that a board workflow causes: the board does not close issues at Done")
 
+        # Change a board field of alpha on GitHub behind the drafts. The field moves only the time of the board item.
+        run.board.priority.set(run.board, run.board.item(run.repo, alpha), "high")
+        time.sleep(issues.WORKFLOW_DELAY)
+        code, out = run.script("plan", top)
+        run.expect("plan reports a board field change as a conflict", code != 0 and f"conflict #{alpha}" in out, out)
+
         # The check refuses a reference to a draft that does not exist.
         edit(alpha_file, blocked_by='["99-missing.md"]')
         code, out = run.script("check", top)

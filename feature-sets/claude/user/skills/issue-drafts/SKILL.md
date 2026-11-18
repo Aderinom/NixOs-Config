@@ -20,6 +20,11 @@ tree is a set of drafts like any other.
 - Read the parent: `gh issue view <n> --repo <owner/repo> --json title,body,labels,milestone`.
 - Read its sub-issues: `gh api repos/<owner/repo>/issues/<n>/sub_issues --jq '.[] | "\(.number) \(.title)"'`.
   Do not draft an issue that already exists.
+- If the drafts folder of the parent exists already, run `plan` on it before
+  you add a draft. A conflict marks a stale draft.
+- Replace each stale draft before you go on. Delete the draft and its `.sub`
+  folder, then export the issue again with `export --single`.
+- If the user edited a stale draft, ask before you delete it.
 - Read the conventions of the repository: the title format in the project
   rules, and the title of the parent. Follow the same format.
 - Number the titles only if the issues of one level have a real order,
@@ -126,7 +131,7 @@ One or two sentences.
 - If a board closes issues at `Done`, give a closed issue the Status `Done`.
   Otherwise the board and the drafts disagree.
 - `issue` stays empty until the issue exists. `updated` is the time of the
-  last change that the drafts know.
+  last change that the drafts know, to the issue or to its board fields.
 - The script writes `issue` and `updated`.
 - In the body, `#ref:<path>` names another draft, for example
   `#ref:../02-<slug>.md`. GitHub shows the issue number in its place.
@@ -268,6 +273,13 @@ python3 <skill folder>/scripts/issues.py export <n> <out folder> --repo <owner/r
 
 `export --single` writes issue `<n>` and its open sub-issues. It puts them
 into `<out folder>/<parent>-<slug>.sub/`, so the parent stays the same.
+
+If that folder exists, the draft goes after the last draft of the folder.
+If a draft of the folder holds `<n>` already, `export --single` stops.
+
+Export an existing issue with `export --single` before you change it. Do not
+write its draft by hand, because `export` writes the `updated` time that the
+conflict check needs.
 
 If `<n>` has no parent, the folder name has no number.
 

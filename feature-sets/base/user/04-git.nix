@@ -7,6 +7,8 @@
 
   programs.git.ignores = [
     "_local/"
+    # The comment threads of the CodeReview.json extension, see the code-threads skill.
+    ".review/"
     "**/.claude/settings.local.json"
   ];
 

@@ -36,6 +36,14 @@ It writes `_local/<branch>/REVIEW.md` in the layout of step 3. The `pull`
 command also merges: it keeps the R numbers, the topics, and each reply
 that is not sent yet. Run it again after the reviewer answers.
 
+`pull` also puts each thread on its line of code, in the review
+`<branch>-feedback` of the `code-threads` skill, and makes that review
+active. The `FeedbackThreads` class of the script explains how it adds
+only the new comments. A thread without a file and a line stays in
+`REVIEW.md` only.
+
+After each `pull`, tell the user the name of the review.
+
 The script reads Reviewable only. Also read the GitHub inline comments with
 `gh api --paginate repos/<owner>/<repo>/pulls/<n>/comments`. Skip the
 comments that Reviewable mirrors. Add each other comment to `REVIEW.md` by
@@ -107,15 +115,21 @@ column.
 
 ## 4. Agree on the changes
 
-Go through the threads with the user before you change code. For each
-thread, propose one of these:
+The user decides each thread at the code, with a reply of `reviewer` in
+the thread, or in chat by R number. Wait for the user before you change
+code.
+
+Run `list` of the `code-threads` script before you act. A reply of the
+user says what to do. A thread without a reply of the user is still open.
+
+For each open thread, propose one of these in chat, with a recommendation:
 
 - Change the code. Say what changes.
 - Push back. Give the reason.
 - Ask the reviewer a question.
 - Only acknowledge, for example for a bot comment.
 
-Give a recommendation for each thread. Wait for the decisions of the user.
+If a chat answer and the state file disagree, ask the user.
 
 ## 5. Write TODO.md
 
@@ -156,6 +170,7 @@ After the commit of a task:
 2. Write the draft reply in `REVIEW.md` under each thread that the task
    answers. Set the disposition that you propose.
 3. Run `pull` again, so the table shows the `+` for the new reply.
+4. Show each draft reply at the code, see "Drafts at the code".
 
 Keep each reply short:
 
@@ -170,6 +185,23 @@ voice.
 
 If the user edits a reply in `REVIEW.md`, keep the edit. Read the file
 again before you publish.
+
+### Drafts at the code
+
+The user reads the draft replies next to the code. Add each draft reply as
+a reply of `agent` to the thread `t_r<number>`, with the `code-threads`
+script:
+
+```bash
+python3 -I ~/.claude/skills/code-threads/scripts/threads.py --review <branch>-feedback reply t_r<number> -
+```
+
+Start the body with `**Draft:**`, so the user tells it apart from a
+published reply.
+
+The user cannot edit a draft. To change a draft, the user replies to it.
+Run `list` before you publish, and take each change of the user into the
+reply block in `REVIEW.md`.
 
 ## 7. Publish
 
