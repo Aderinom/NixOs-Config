@@ -1,6 +1,6 @@
 ---
 name: review
-description: Review a code change in an agent, fix the findings that only follow the written rules, and put the findings that need a decision as comment threads on the code. Use when the user asks to review a diff, a branch, a commit, a PR, or files, and after each implementation step of a TODO.md.
+description: Review a code change of the user. Fix the findings that only follow the written rules. Put the findings that need a decision as comment threads on the code. Use when the user asks to review their own diff, branch, commit, PR, or files, and after each implementation step of a TODO.md. For a PR of someone else, use peer-review.
 ---
 
 # Review
@@ -16,20 +16,38 @@ Load the `diff-target` skill. It finds the change and its base.
 
 ## Run in an agent
 
-Run the review in a new agent of type `general-purpose`, with
-`isolation: "worktree"`, not in the main session.
+Run the review in a new agent of type `general-purpose`, not in the main
+session. Do not set `isolation`: the agent works in the review worktree.
 
 If you are that agent, skip this section.
 
-- The worktree can start at another commit than `HEAD`. Tell the agent to
-  check out the commit of `HEAD` first, by its hash.
+### The review worktree
+
+The review worktree sits at `.claude/worktrees/review` in the repository.
+It keeps one path across reviews, so the build cache of its crates stays
+warm and a review rebuilds only the crates that the patch touches.
+
+1. If the worktree does not exist, create it detached:
+   `git worktree add --detach .claude/worktrees/review`.
+2. If `.claude/worktrees/review/.review-lock` exists, another review uses
+   the worktree. Use `.claude/worktrees/review-2` in the same way.
+3. Create the lock file. Delete it when the agent returns.
+
+### The agent
+
+- Tell the agent the path of the review worktree. It runs every command
+  there.
+- Tell it to reset the worktree first: `git checkout --detach --force
+  <hash of HEAD>`, then `git clean -fd`.
 - If the target has uncommitted changes, write them to
   `_local/<branch>/review.patch` with `git diff --binary HEAD`. Tell the
-  agent to apply the patch after the checkout.
+  agent to apply the patch after the reset.
 - Give the agent the base, the target, the patch, and the path of this
   skill. Tell it to follow the skill.
 - Do not give it your summary of the change or your guess where the bugs
   are.
+- Tell it which checks already pass in the main checkout, such as clippy
+  and the tests. It builds only to reproduce a suspected bug.
 
 When the agent returns, follow "Apply and report". Do not add findings of
 your own.
@@ -51,6 +69,9 @@ Check in this order. Stop a pass early if it finds nothing.
    change does not use.
 
 Follow the project rules where they differ from the global rules.
+
+If the change is a pull request of someone else, load `peer-review`
+instead.
 
 ## Kinds
 

@@ -6,7 +6,7 @@
     threads.py reply <thread> <body> [--author <name>]
     threads.py resolve <thread>
     threads.py reopen <thread>
-    threads.py list [--all]
+    threads.py list [--all] [--json]
 
 Each command takes `--review <name>`.
 
@@ -22,6 +22,8 @@ A body of `-` reads the text from stdin.
 
 `list` shows the threads that wait for us: the last comment is not ours, or the last event is a
 reopen. `--all` shows every thread.
+
+`list --json` prints the same threads as a JSON list, with the fields of `Review.threads`.
 """
 
 import argparse
@@ -53,7 +55,7 @@ def main():
     elif args.command in ("resolve", "reopen"):
         review.append({"op": args.command, "thread": args.thread})
     else:
-        review.print_threads(args.all)
+        review.print_threads(args.all, args.json)
 
 
 class Cli:
@@ -84,7 +86,9 @@ class Cli:
         for command in ("resolve", "reopen"):
             sub.add_parser(command).add_argument("thread")
 
-        sub.add_parser("list").add_argument("--all", action="store_true")
+        list_ = sub.add_parser("list")
+        list_.add_argument("--all", action="store_true")
+        list_.add_argument("--json", action="store_true", help="print the threads as a JSON list")
 
         # `use` names the review itself.
         args = parser.parse_args()
@@ -226,12 +230,14 @@ class Review:
 
         return list(threads.values())
 
-    def print_threads(self, show_all):
-        for thread in self.threads():
-            waiting = thread["waiting"]
-            if not (show_all or waiting):
-                continue
+    def print_threads(self, show_all, as_json=False):
+        threads = [t for t in self.threads() if show_all or t["waiting"]]
+        if as_json:
+            print(json.dumps(threads, indent=2, ensure_ascii=False))
+            return
 
+        for thread in threads:
+            waiting = thread["waiting"]
             where = f"{thread['file']}:{thread['range']['startLine']}"
             marker = " (waits for us)" if waiting else ""
             print(f"## {thread['id']} [{thread['status']}] {where}{marker}")

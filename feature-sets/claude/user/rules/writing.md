@@ -14,6 +14,9 @@ Hard rules:
   "the directory authenticates" or "the config names a directory", rewrite
   the sentence. Use the unit that does it, or state the relation: "the
   config holds", "sets", or "has".
+- An error, a type, a config, or a module cannot say, name, tell, know,
+  want, see, decide, or care. Use holds, has, sets, or returns, or make
+  the real actor the subject.
 - Do not start a sentence with a bare "This" or "It" that points at a
   whole earlier sentence. Name the thing: "The vote chain links each TRC
   to its predecessor."
@@ -41,6 +44,8 @@ Hard rules:
 - Leave code, commands, paths, and error messages byte-exact. Do not style
   them.
 - No em-dashes.
+- Avoid counts, such as "four modules". A count goes stale when the
+  list changes.
 
 These rules cover everything you write: chat, docs, and code comments.
 
@@ -74,7 +79,8 @@ Cut or replace these on sight:
   paragraph.
 - Sales tone: "powerful", "elegant", "best-in-class", "out of the box".
 - Pattern tricks: "not just X, but Y", three adjectives in a row, a rhetorical
-  question as a heading.
+  question as a heading, a title with a colon and a tagline such as "Path
+  issues: problems in the network that make paths worse for a while".
 - Formatting noise: bold on every other phrase, emoji in headings, a heading
   over one sentence, a bullet list where one sentence works.
 - Narration in comments: "Here we", "Now we", "This function will", a comment
@@ -83,8 +89,8 @@ Cut or replace these on sight:
   "Two variables need care:", "The next section explains them." Start with
   the content.
 - A sentence before a list states a fact about the whole list, for
-  example "The CP-PKI has three levels of certificates below the TRC."
-  It does not only announce the list.
+  example "Each level of the CP-PKI signs the level below it." It does
+  not only announce the list.
 
 ## Comments and documentation
 
@@ -98,6 +104,19 @@ Cut or replace these on sight:
 - Pick the topics before you write. Give each topic depth by its weight for
   the reader, not by the order in which you read the code.
 - If a unit has a header comment, point the docs at it. Do not restate it.
+- If a module carries a concept, its module doc introduces the concept. A
+  module carries a concept if it holds more than one thing, and a reader
+  must understand from the file how the parts work together.
+- The introduction names the main parts with their roles. Then it shows how
+  a caller uses the parts together.
+- A crate doc is the entry point for a user of the crate. Its first
+  sentence says what the crate does, in words that match its name.
+
+  The next sentence names its main concepts.
+- Give each concept of a crate a section: what it is and when to use it,
+  its main types, a link to its module doc, and a short code example.
+- If the concepts are independent, say that a caller can use each alone.
+- If a module does not carry a concept, its module doc is one line.
 - If I ask for detailed docs, go deeper on what the code does not show. Do
   not add more topics.
 - If a reader hits the behavior without opening the file, put the reason in

@@ -155,8 +155,7 @@ After the last commit, the rebase ends. Then:
 4. Tick the findings in the log.
 5. Show the effect of the review with
    `git range-diff <base>..<branch>-review-backup <base>..HEAD`.
-
-Keep the backup branch. Delete it only when the user says so.
+6. Delete the backup branch with `git branch -D <branch>-review-backup`.
 
 ## Abort
 

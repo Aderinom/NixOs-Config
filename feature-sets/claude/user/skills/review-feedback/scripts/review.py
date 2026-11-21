@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """Pulls the Reviewable discussions of a pull request into REVIEW.md, and posts the replies back.
 
-    review.py pull <owner/repo/pr> [--file <path>]
+    review.py pull <owner/repo/pr> [--file <path>] [--open-only]
     review.py post <owner/repo/pr> [--file <path>]
 
 `pull` writes one section per discussion: the comments, then a reply block.
 
+With `--open-only`, `pull` puts no done thread on the code. A done thread is resolved, or only bots
+wrote in it.
+
 On a second run, `pull` keeps the R numbers, the topics, and each reply that is not sent yet.
+
+`pull` also writes the commit of the last review of each reviewer. It reads them with `gh`.
 
 `post` sends each written reply as a draft with its disposition, then compares the drafts in
 Reviewable with the file.
@@ -44,6 +49,7 @@ NO_REPLY = "`NO REPLY`"
 MARKERS = (OPEN, NO_REPLY)
 
 SECTION = re.compile(r"^## R(\d+)\. (.*)$", re.M)
+DONE = re.compile(r"^- R(\d+)\. (.*) · \[R\d+ thread\]$", re.M)
 THREAD_DEF = re.compile(r"^\[R(\d+) thread\]: \S+#(\S+)$", re.M)
 REPLY = re.compile(r"^### Reply \[([a-z]+)\]\n\n(.*?)(?=\n\n" + RULE + r"\n|\n\n" + LINKS + ")", re.S | re.M)
 
@@ -132,6 +138,7 @@ class Thread:
         self.comments = data.get("comments", [])
         self.location = data.get("location")
         self.dispositions = {p["username"]: p.get("disposition", "") for p in data.get("participants", [])}
+        self.bots = {p["username"] for p in data.get("participants", []) if p.get("bot")}
         self.own_keys = own_keys
         self.number = None
         self.topic = None
@@ -178,6 +185,23 @@ class Thread:
 
         last_is_own = bool(self.comments) and self.is_own(self.comments[-1])
         self.reply = NO_REPLY if last_is_own else OPEN
+
+    def is_done(self):
+        """Whether the thread needs no more work: Reviewable resolved it, or only bots wrote in it.
+
+        A thread with a reply that is not sent yet is never done.
+        """
+        if self.reply not in MARKERS:
+            return False
+
+        resolved = self.data.get("status", {}).get("resolved", False)
+        others = {c["author"]["username"] for c in self.comments if not self.is_own(c)}
+        only_bots = bool(others) and others <= self.bots
+        return resolved or only_bots
+
+    def is_waiting(self):
+        """Whether the thread waits for the reviewer: our comment is the last, and it is not done."""
+        return self.reply == NO_REPLY and not self.is_done()
 
     def heading(self):
         return f"R{self.number}. {self.where()}: {self.topic}"
@@ -254,19 +278,38 @@ class ReviewFile:
                 "disposition": reply.group(1) if reply else None,
                 "reply": reply.group(2).strip() if reply else None,
             }
+
+        # A waiting or done thread has one line, which keeps its number and its topic.
+        for number, heading in DONE.findall(text):
+            entries[keys.get(int(number))] = {
+                "number": int(number),
+                "heading": heading,
+                "disposition": None,
+                "reply": None,
+            }
         return entries
 
     @staticmethod
-    def render(threads, pr, review_dir, repo_root):
+    def render(threads, pr, review_dir, repo_root, last_reviews):
         # The title, and the reviewers: everyone who wrote a comment that is not ours.
         owner, repo, number = pr.split("/")
         reviewers = sorted({c["author"]["username"] for t in threads for c in t.comments if not t.is_own(c)})
         lines = [LINT, "", f"# Review of PR #{number}", ""]
         lines += [f"[#{number}] · reviewers: {', '.join(reviewers) or 'none'}", ""]
 
-        # The overview table: one row per thread, with a link to its heading.
+        # The commit of the last review of each reviewer, ours included.
+        seen = [f"{login} at `{commit[:10]}` ({date})" for login, (commit, date) in last_reviews.items()]
+        lines += [f"Last reviews: {', '.join(seen) or 'none'}", ""]
+
+        # The threads that need our work get a section each. A thread that waits for the reviewer,
+        # or that is done, gets one line in a list of its own.
+        open_threads = [t for t in threads if not t.is_done() and not t.is_waiting()]
+        waiting_threads = [t for t in threads if t.is_waiting()]
+        done_threads = [t for t in threads if t.is_done()]
+
+        # The overview table: one row per open thread, with a link to its heading.
         rows = [("#", "Where", "Topic", "Reply")]
-        for t in threads:
+        for t in open_threads:
             has_reply = t.reply not in MARKERS
             rows.append((f"[R{t.number}]", t.where(), t.topic, "+" if has_reply else ""))
         widths = [max(len(row[i]) for row in rows) for i in range(4)]
@@ -275,13 +318,21 @@ class ReviewFile:
         lines += [table_row(row, widths) for row in rows[1:]]
         lines.append("")
 
-        lines += [t.render(review_dir, repo_root) for t in threads]
+        lines += [t.render(review_dir, repo_root) for t in open_threads]
+        for title, listed in (("Waiting for the reviewer", waiting_threads), ("Done", done_threads)):
+            if listed:
+                lines += [RULE, "", f"## {title}", ""]
+                lines += [f"- {t.heading()} · [R{t.number} thread]" for t in listed]
+                lines.append("")
 
-        # The link definitions: the PR, the heading anchors, then the links of each thread.
+        # The link definitions: the PR, the heading anchors, then the links of each thread. A listed
+        # thread keeps only its thread link, which also holds its key for the next pull.
         lines += [LINKS, "", f"[#{number}]: https://reviewable.io/reviews/{owner}/{repo}/{number}"]
-        lines += [f"[R{t.number}]: #{slug(t.heading())}" for t in threads]
-        for t in threads:
+        lines += [f"[R{t.number}]: #{slug(t.heading())}" for t in open_threads]
+        for t in open_threads:
             lines += [f"[{label}]: {target}" for label, target in t.links(review_dir, repo_root)]
+        for t in waiting_threads + done_threads:
+            lines += [f"[{label}]: {target}" for label, target in t.links(review_dir, repo_root)[:1]]
         return "\n".join(lines) + "\n"
 
 
@@ -300,18 +351,29 @@ class FeedbackThreads:
     LOCAL_AUTHORS = ("agent", "reviewer")
 
     @staticmethod
-    def sync(threads, repo_root):
-        """Adds the new threads and comments, and returns the name of the review."""
+    def sync(threads, repo_root, open_only=False):
+        """Adds the new threads and comments, and returns the name of the review.
+
+        If `open_only` is set, it skips each done thread.
+        """
         review = Review(repo_root, git("branch", "--show-current") + "-feedback")
         review.activate()
         existing = {t["id"]: t for t in review.threads()}
 
         for thread in threads:
+            if open_only and thread.is_done():
+                continue
+
             # A thread on the whole PR has no line to sit on. It stays in REVIEW.md only.
             location = thread.location or {}
             path = repo_root / location.get("file", {}).get("path", "")
             line = location.get("line")
             if not line or not path.is_file():
+                continue
+
+            # A later commit can shorten the file below the line. Such a thread also stays in
+            # REVIEW.md only, so that it does not stop the threads after it.
+            if line > len(path.read_text().splitlines()):
                 continue
 
             # The comments of the thread that the log does not hold yet.
@@ -388,13 +450,14 @@ def pull(args):
             thread.merge(None, None)
     threads.sort(key=lambda t: t.number)
 
+    reviews = last_reviews(args.pr)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(ReviewFile.render(threads, args.pr, path.parent, repo_root))
+    path.write_text(ReviewFile.render(threads, args.pr, path.parent, repo_root, reviews))
     open_count = sum(t.reply == OPEN for t in threads)
     print(f"{path}: {len(threads)} threads, {open_count} open")
 
     # The same threads on the code, for VS Code.
-    review = FeedbackThreads.sync(threads, repo_root)
+    review = FeedbackThreads.sync(threads, repo_root, args.open_only)
     print(f"threads: review {review}")
 
 
@@ -467,6 +530,30 @@ def table_row(cells, widths):
     return "| " + " | ".join(c.ljust(w) for c, w in zip(cells, widths)) + " |"
 
 
+def last_reviews(pr):
+    """Returns the commit and the date of the last GitHub review of each reviewer, by login.
+
+    Each Reviewable publish is a GitHub review, and GitHub keeps the head of the PR at that time.
+    The author of the PR is not a reviewer.
+    """
+    owner, repo, number = pr.split("/")
+    path = f"repos/{owner}/{repo}/pulls/{number}"
+    author = gh("api", path, "--jq", ".user.login")
+    rows = gh("api", "--paginate", f"{path}/reviews", "--jq", ".[] | [.user.login, .commit_id, .submitted_at] | @tsv")
+
+    # GitHub lists the reviews from the oldest to the newest, so the last row of a login wins.
+    last = {}
+    for row in rows.splitlines():
+        login, commit, submitted = row.split("\t")
+        if login != author:
+            last[login] = (commit, submitted[:10])
+    return last
+
+
+def gh(*args):
+    return subprocess.run(["gh", *args], capture_output=True, text=True, check=True).stdout.strip()
+
+
 def git(*args):
     return subprocess.run(["git", *args], capture_output=True, text=True, check=True).stdout.strip()
 
@@ -478,6 +565,8 @@ def main():
         command = sub.add_parser(name)
         command.add_argument("pr", help="owner/repo/number, for example Anapaya/scion/31791")
         command.add_argument("--file", help="the REVIEW.md to use")
+        if name == "pull":
+            command.add_argument("--open-only", action="store_true", help="put no done thread on the code")
         command.set_defaults(func=func)
     args = parser.parse_args()
     args.func(args)

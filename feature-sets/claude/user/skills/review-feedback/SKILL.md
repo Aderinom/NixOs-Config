@@ -64,6 +64,8 @@ discussions without a file first.
 
 [#31791] · reviewers: bunert
 
+Last reviews: bunert at `5b9c7028a2` (2026-11-18)
+
 | #    | Where          | Topic                  | Reply |
 | ---- | -------------- | ---------------------- | ----- |
 | [R1] | general        | PR description wording | +     |

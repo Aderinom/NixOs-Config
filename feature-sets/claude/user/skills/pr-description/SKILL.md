@@ -89,6 +89,11 @@ Rules for `Behavior changes:` and the `BREAKING CHANGE:` footer:
 
 - If a caller, a user, or an operator sees a different result, add
   `Behavior changes:`. Name the component and the new behavior.
+- Count only the API that the users of a crate are meant to call. Internal
+  units that are `pub` for the workspace, such as the WAP control plane, do
+  not count.
+
+  If unsure, ask.
 - Before you decide that nothing breaks, check each changed dependency of a
   public crate.
 - If a `pub use` re-exports the dependency, a public type implements one of

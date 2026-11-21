@@ -15,6 +15,10 @@ If `stop_hook_active` in the hook input is true, return `{"ok": true}` at once.
    `/home/akelbsch/.nixos-config/feature-sets/claude/user/plugins/text-rules/extract.sh <transcript_path>`.
    It prints the new text of each Edit and Write call in this turn. Do not
    read the transcript yourself.
+
+   Run the command exactly as written: no pipe, no redirect, no `cd`, and no
+   interpreter in front. The permission rule matches only the plain command,
+   so any addition gets the call denied.
 3. In that new text, check only code comments, doc comments, and Markdown
    prose. Skip code, commands, paths, and quoted error messages.
 
@@ -24,6 +28,10 @@ If `extract.sh` prints nothing, return `{"ok": true}` at once.
 
 Look for these problems first:
 
+- A subject that cannot do its verb, from the actor rule. Look for an
+  error, a type, a config, or a module that says, names, tells, knows,
+  wants, sees, decides, or cares.
+- A title or heading with a colon and a tagline.
 - Fancy or written-only words where a plain word works.
 - A fact said twice, in one text or across files.
 - Text that explains more than the reader needs to act.

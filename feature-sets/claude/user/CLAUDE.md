@@ -48,6 +48,22 @@ These rules apply to every Claude Code session for this user. A per-project
   for all text, `code-layout.md` for function bodies, `workflow.md` for
   work in steps.
 
+### Skill tools
+
+- If a step of a skill repeats in each run and needs no judgment, propose
+  a script for it. Examples are review threads to a Markdown file, or a
+  Markdown file to API payloads.
+- Propose the script at the end of the run, with the steps it replaces.
+  Build it after I approve.
+- Give each command that writes or sends something a dry run. The dry run
+  prints the result and changes nothing.
+- If a script reads or writes a file format of its own, parse the input
+  into a model. Serialize the model to each output format.
+- Do not edit the input text into the output, for example with `sed` or
+  regex replacements.
+- Give each script tests that need no network. For a model, test that the
+  output reads back into the same model.
+
 ## 02 Code
 
 ### Git
@@ -66,3 +82,8 @@ These rules apply to every Claude Code session for this user. A per-project
 - Before you create, move, split, or name a module, file, or folder, load
   the `code-structure` skill. It holds my rules for placement and names,
   and the steps to agree on a tree with me.
+
+### Limits
+
+- Put the measured cost of a limit in its doc comment, in one line, for
+  example `~72 bytes per entry`.
