@@ -72,7 +72,6 @@
       },
     },
   },
-  "workbench.sideBar.location": "right",
   "chat.commandCenter.enabled": false,
   "explorer.autoReveal": true,
   "[css]": {
@@ -168,7 +167,7 @@
     "https://biomejs.dev": true,
   },
   "claudeCode.preferredLocation": "panel",
-  "diffEditor.renderSideBySide": false,
+  "diffEditor.renderSideBySide": true,
   "claudeCode.hideOnboarding": true,
   "intellij.region": "europe",
   "intellij.dataSharing": "none",
@@ -193,4 +192,5 @@
       },
     ],
   },
+  "workbench.sideBar.location": "right",
 }
